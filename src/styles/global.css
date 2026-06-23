@@ -7,56 +7,49 @@
 @import "./utilities.css";
 
 @font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Pixelify Sans";
-	src: url("/fonts/pixelify-sans-400.ttf") format("truetype");
+	font-family: "Manrope";
+	src: url("/fonts/manrope-400.ttf") format("truetype");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Pixelify Sans";
-	src: url("/fonts/pixelify-sans-500.ttf") format("truetype");
+	font-family: "Manrope";
+	src: url("/fonts/manrope-500.ttf") format("truetype");
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Pixelify Sans";
-	src: url("/fonts/pixelify-sans-600.ttf") format("truetype");
+	font-family: "Manrope";
+	src: url("/fonts/manrope-600.ttf") format("truetype");
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Pixelify Sans";
-	src: url("/fonts/pixelify-sans-700.ttf") format("truetype");
+	font-family: "Manrope";
+	src: url("/fonts/manrope-700.ttf") format("truetype");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 
+@font-face {
+	font-family: "Manrope";
+	src: url("/fonts/manrope-800.ttf") format("truetype");
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+
 :root {
-	--font-display: "Pixelify Sans", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-	--font-body: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-	--font-readable: Atkinson, ui-sans-serif, system-ui, sans-serif;
+	--font-display: "Manrope", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--font-body: "Manrope", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--font-readable: "Manrope", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
@@ -79,6 +72,8 @@ body {
 	font-size: 16px;
 	line-height: 1.65;
 	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 main:not(.use-utility-layout) {
@@ -97,13 +92,13 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: var(--color-text-primary);
 	font-family: var(--font-display);
-	font-weight: 700;
+	font-weight: 800;
 	letter-spacing: 0;
 	line-height: 1.2;
 }
 
 h1 {
-	font-size: clamp(2.7rem, 7vw, 6.25rem);
+	font-size: clamp(3rem, 10vw, 8.5rem);
 	line-height: 0.92;
 }
 
@@ -128,14 +123,20 @@ b {
 	font-weight: 700;
 }
 
-a:not(.sw-btn):not(.sw-btn-sm):not(.no-underline) {
-	color: var(--accent);
+a:not(.sw-btn):not(.sw-btn-sm):not(.dev-button):not(.sw-tag):not(.sw-share-btn):not(.no-underline) {
+	color: inherit;
+	text-decoration: none;
+}
+
+.prose a:not(.sw-btn):not(.sw-btn-sm):not(.dev-button):not(.sw-tag):not(.sw-share-btn):not(.no-underline),
+.article-prose a:not(.sw-btn):not(.sw-btn-sm):not(.dev-button):not(.sw-tag):not(.sw-share-btn):not(.no-underline) {
+	color: var(--accent-dark);
 	text-decoration: underline;
 	text-underline-offset: 3px;
 }
 
-a:not(.sw-btn):not(.sw-btn-sm):not(.no-underline):hover {
-	color: var(--accent-dark);
+.prose a:not(.sw-btn):not(.sw-btn-sm):not(.dev-button):not(.sw-tag):not(.sw-share-btn):not(.no-underline):hover,
+.article-prose a:not(.sw-btn):not(.sw-btn-sm):not(.dev-button):not(.sw-tag):not(.sw-share-btn):not(.no-underline):hover {
 	text-decoration-thickness: 2px;
 }
 
@@ -178,7 +179,7 @@ code {
 	border: 1px solid var(--color-border-light);
 	border-radius: 2px;
 	color: var(--color-text-primary);
-	font-family: var(--font-body);
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 	font-size: 0.9em;
 }
 
@@ -189,6 +190,7 @@ pre {
 	background: var(--color-terminal-bg);
 	color: var(--color-terminal-text);
 	overflow: auto;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 pre > code {

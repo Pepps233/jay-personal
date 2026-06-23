@@ -1,25 +1,23 @@
 ---
 import SiteShell from '../components/SiteShell.astro';
-import PixelHero from '../components/PixelHero.astro';
-import StatusPanel from '../components/StatusPanel.astro';
-import SkillsSection from '../components/sections/SkillsSection.astro';
-import WorkExperience from '../components/sections/WorkExperience.astro';
-import Studies from '../components/sections/Studies.astro';
-import Projects from '../components/sections/Projects.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { skills } from '../data/skills';
-import { work } from '../data/work';
-import { studies } from '../data/studies';
-import { statusItems } from '../data/status';
+
+const links = [
+  { label: 'blog', href: '/blog/' },
+  { label: 'projects', href: '/projects/' },
+  { label: 'about', href: '/about/' },
+  { label: 'github', href: 'https://github.com/Pepps233', external: true },
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/yujay1/', external: true },
+  { label: 'email', href: 'mailto:jialey2025@gmail.com' },
+];
 ---
 
-<SiteShell title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<SiteShell title={SITE_TITLE} description={SITE_DESCRIPTION} mainClass="landing-main" showFooter={false}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Jay Yu',
-      alternateName: 'Jiale Yu',
       url: new URL('/', Astro.site).toString(),
       sameAs: [
         'https://github.com/Pepps233',
@@ -28,23 +26,19 @@ import { statusItems } from '../data/status';
     })} />
   </Fragment>
 
-  <PixelHero
-    title="Jay (Jiale) Yu"
-    tagline="Computer science student, founder, and builder working across backend systems, machine learning, and robotics software."
-    primaryCTA={{ text: 'Projects', href: '/portfolio' }}
-    secondaryCTA={{ text: 'Read log', href: '/blog' }}
-  />
-
-  <StatusPanel items={statusItems} />
-
-  <div class="pixel-divider" aria-hidden="true">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  <Projects title="Selected projects" description="Compact build notes from robotics, computer vision, backend services, and tooling." />
-  <SkillsSection title="Working stack" skills={skills} />
-  <WorkExperience title="Work log" items={work} />
-  <Studies title="Studies" items={studies} />
+  <section class="landing-home" aria-labelledby="home-title">
+    <h1 id="home-title">Hello</h1>
+    <p class="landing-name">Jay Yu</p>
+    <nav class="landing-links" aria-label="Primary pages">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
+        >
+          [{link.label}]
+        </a>
+      ))}
+    </nav>
+  </section>
 </SiteShell>

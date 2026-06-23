@@ -33,9 +33,9 @@ const meta = getCategoryMeta(category);
   <BlogLogHeader
     title={meta.title}
     description={meta.description}
-    label="CATEGORY"
+    label="Category"
     count={posts.length}
     feedHref={`/rss/category/${category}.xml`}
   />
-  <BlogPostList posts={posts} title="Category logs" />
+  <BlogPostList posts={posts} title="Category posts" />
 </SiteShell>

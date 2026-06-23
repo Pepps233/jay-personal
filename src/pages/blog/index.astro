@@ -18,14 +18,14 @@ const featuredReading = featured
   : 0;
 ---
 
-<SiteShell title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<SiteShell title="Blog" description="Notes and essays by Jay Yu.">
   <Fragment slot="head">
     {totalPages > 1 && <link rel="next" href="/blog/page/2/" />}
   </Fragment>
 
   <BlogLogHeader
     title="Blog"
-    description="Technical notes on software, robotics, machine learning, and founder work."
+    description="Notes, essays, and build records."
     count={posts.length}
     feedHref="/rss.xml"
   />
@@ -34,15 +34,14 @@ const featuredReading = featured
     <section class="dev-section" aria-labelledby="featured-post-title">
       <div class="module-header">
         <div>
-          <span class="module-label">FEATURED</span>
-          <h2 id="featured-post-title">Pinned log</h2>
+          <span class="module-label">Featured</span>
+          <h2 id="featured-post-title">Pinned post</h2>
         </div>
-        <span class="status-chip">LATEST SIGNAL</span>
       </div>
       <FeaturedPost post={featured} readingTimeMin={featuredReading} />
     </section>
   )}
 
-  <BlogPostList posts={firstPagePosts} title="Recent logs" />
+  <BlogPostList posts={firstPagePosts} title="Recent posts" />
   <BlogPagination currentPage={1} totalPages={totalPages} />
 </SiteShell>

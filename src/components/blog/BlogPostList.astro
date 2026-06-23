@@ -8,16 +8,16 @@ interface Props {
   label?: string;
 }
 
-const { posts = [], title = 'All posts', label = 'OUTPUT' } = Astro.props as Props;
+const { posts = [], title = 'All posts', label } = Astro.props as Props;
 ---
 
 <section class="blog-list-module">
   <div class="module-header">
     <div>
-      <span class="module-label">{label}</span>
+      {label && <span class="module-label">{label}</span>}
       <h2>{title}</h2>
     </div>
-    <span class="status-chip">{posts.length} ITEMS</span>
+    <span class="status-chip">{posts.length} posts</span>
   </div>
   <div class="blog-grid">
     {posts.map((post) => (

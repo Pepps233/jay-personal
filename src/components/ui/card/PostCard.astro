@@ -29,7 +29,7 @@ const tags = post.data.tags || [];
   <div class="post-card__body">
     <div class="post-card__meta">
       <span><FormattedDate date={post.data.pubDate} /></span>
-      {readingTimeMin > 0 && <span>{readingTimeMin} MIN</span>}
+      {readingTimeMin > 0 && <span>{readingTimeMin} min</span>}
     </div>
     <h3>{post.data.title}</h3>
     <p>{post.data.description}</p>

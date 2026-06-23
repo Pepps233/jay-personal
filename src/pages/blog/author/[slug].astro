@@ -23,9 +23,9 @@ const authorName = posts[0]?.data.author || 'Jay Yu';
 <SiteShell title={`Articles by ${authorName}`} description={`Posts written by ${authorName}.`}>
   <BlogLogHeader
     title={`Author / ${authorName}`}
-    description="A filtered author view of the technical log."
-    label="AUTHOR"
+    description="A filtered author view."
+    label="Author"
     count={posts.length}
   />
-  <BlogPostList posts={posts} title="Author logs" />
+  <BlogPostList posts={posts} title="Posts" />
 </SiteShell>

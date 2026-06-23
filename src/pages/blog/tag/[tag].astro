@@ -27,9 +27,9 @@ const meta = getTagMeta(tag);
   <BlogLogHeader
     title={meta.title}
     description={meta.description}
-    label="TAG"
+    label="Tag"
     count={posts.length}
     feedHref={`/rss/tag/${tag}.xml`}
   />
-  <BlogPostList posts={posts} title="Tagged logs" />
+  <BlogPostList posts={posts} title="Tagged posts" />
 </SiteShell>

@@ -6,11 +6,11 @@ interface Props {
   meta?: string[];
 }
 
-const { label = 'OUTPUT', title, description, meta = [] } = Astro.props as Props;
+const { label, title, description, meta = [] } = Astro.props as Props;
 ---
 
 <section class="page-header">
-  <div class="module-label">{label}</div>
+  {label && <div class="module-label">{label}</div>}
   <div class="page-header__grid">
     <div>
       <h1>{title}</h1>

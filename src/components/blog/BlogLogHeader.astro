@@ -7,18 +7,18 @@ interface Props {
   feedHref?: string;
 }
 
-const { title, description, label = 'LOG', count, feedHref } = Astro.props as Props;
+const { title, description, label, count, feedHref } = Astro.props as Props;
 ---
 
 <section class="blog-log-header">
-  <div class="module-label">{label}</div>
+  {label && <div class="module-label">{label}</div>}
   <div class="blog-log-header__inner">
     <div>
       <h1>{title}</h1>
       {description && <p>{description}</p>}
     </div>
     <div class="blog-log-header__actions">
-      {typeof count === 'number' && <span class="status-chip">{count} ENTRIES</span>}
+      {typeof count === 'number' && <span class="status-chip">{count} posts</span>}
       {feedHref && <a class="dev-button" href={feedHref}>RSS</a>}
     </div>
   </div>

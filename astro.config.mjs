@@ -8,7 +8,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://jayyu.dev/',
+  site: 'https://jayyu.dev/',
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [mdx(), sitemap()],
 
   vite: {

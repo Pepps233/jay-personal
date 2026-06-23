@@ -21,9 +21,9 @@ const tags = post.data.tags || [];
   )}
   <div class="featured-post__body">
     <div class="post-card__meta">
-      <span>FEATURED</span>
+      <span>Featured</span>
       <span><FormattedDate date={post.data.pubDate} /></span>
-      {readingTimeMin > 0 && <span>{readingTimeMin} MIN READ</span>}
+      {readingTimeMin > 0 && <span>{readingTimeMin} min read</span>}
     </div>
     <h3>{post.data.title}</h3>
     {post.data.description && <p>{post.data.description}</p>}

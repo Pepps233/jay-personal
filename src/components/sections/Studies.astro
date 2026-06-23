@@ -18,18 +18,18 @@ const { items, title = "Studies" } = Astro.props as Props;
 <section class="dev-section" aria-labelledby="studies-title">
   <div class="module-header">
     <div>
-      <span class="module-label">EDU</span>
+      <span class="module-label">Education</span>
       <h2 id="studies-title">{title}</h2>
     </div>
-    <span class="status-chip">{items.length} RECORDS</span>
+    <span class="status-chip">{items.length} items</span>
   </div>
 
   <div class="dashboard-grid">
     {items.map((study) => (
       <article class="module-card study-card">
         <div class="project-card__topline">
-          <span>{study.date || "ACTIVE"}</span>
-          <strong>STUDY</strong>
+          <span>{study.date || "Active"}</span>
+          <strong>Study</strong>
         </div>
         <h3>{study.title}</h3>
         <p class="work-card__company">{study.institution}</p>

@@ -1,6 +1,6 @@
 :root {
-  --skill-icon-bg: rgba(30, 105, 85, 0.1);
-  --tag-pill-bg: rgba(30, 105, 85, 0.08);
-  --tag-pill-border: rgba(30, 105, 85, 0.22);
-  --tag-pill-text: #145a46;
+  --skill-icon-bg: rgba(47, 107, 95, 0.08);
+  --tag-pill-bg: #f4f6f8;
+  --tag-pill-border: rgba(17, 24, 39, 0.09);
+  --tag-pill-text: #27303a;
 }

@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import SiteShell from "../components/SiteShell.astro";
 import PageHeader from "../components/PageHeader.astro";
-import PixelHero from "../components/PixelHero.astro";
 import StatusPanel from "../components/StatusPanel.astro";
 import SkillsSection from "../components/sections/SkillsSection.astro";
 import WorkExperience from "../components/sections/WorkExperience.astro";
@@ -17,44 +16,28 @@ import { work } from "../data/work";
 import { studies } from "../data/studies";
 
 const pageTitle = "Component Catalog";
-const pageDescription = "Internal reference for the light developer component system.";
+const pageDescription = "Internal reference for the current component system.";
 const posts = (await getCollection('blog')).sort((a, b) => +b.data.pubDate - +a.data.pubDate);
 const [firstPost, secondPost, thirdPost] = posts;
 ---
 
 <SiteShell title={pageTitle} description={pageDescription}>
   <PageHeader
-    label="DEMO"
+    label="Demo"
     title={pageTitle}
     description={pageDescription}
-    meta={["Light shell", "Pixel display type", "Dashboard modules"]}
+    meta={["Minimal shell", "Manrope type", "Content modules"]}
   />
-
-  <section class="dev-section">
-    <div class="module-header">
-      <div>
-        <span class="module-label">HERO</span>
-        <h2>Pixel hero</h2>
-      </div>
-      <span class="status-chip">RESPONSIVE</span>
-    </div>
-    <PixelHero
-      title="Jay (Jiale) Yu"
-      tagline="A reusable first-viewport block with CSS pixel mosaic, technical labels, and stable action controls."
-      primaryCTA={{ text: 'Projects', href: '/portfolio' }}
-      secondaryCTA={{ text: 'Blog', href: '/blog' }}
-    />
-  </section>
 
   <StatusPanel items={statusItems} title="Status panel" />
 
   <section class="dev-section">
     <div class="module-header">
       <div>
-        <span class="module-label">UI</span>
-        <h2>Controls and chips</h2>
-      </div>
-      <span class="status-chip">CATALOG</span>
+          <span class="module-label">UI</span>
+          <h2>Controls and chips</h2>
+        </div>
+      <span class="status-chip">Catalog</span>
     </div>
     <div class="dashboard-grid">
       <div class="module-card">
@@ -62,7 +45,7 @@ const [firstPost, secondPost, thirdPost] = posts;
         <div class="chip-row">
           <a class="dev-button dev-button--primary" href="#">Primary</a>
           <a class="dev-button" href="#">Secondary</a>
-          <span class="status-chip">STATUS</span>
+          <span class="status-chip">Status</span>
         </div>
       </div>
       <div class="module-card">
@@ -80,10 +63,10 @@ const [firstPost, secondPost, thirdPost] = posts;
     <section class="dev-section">
       <div class="module-header">
         <div>
-          <span class="module-label">BLOG</span>
+          <span class="module-label">Blog</span>
           <h2>Featured post</h2>
         </div>
-        <span class="status-chip">MODULE</span>
+        <span class="status-chip">Module</span>
       </div>
       <FeaturedPost post={firstPost} readingTimeMin={4} />
     </section>
@@ -93,10 +76,10 @@ const [firstPost, secondPost, thirdPost] = posts;
     <section class="dev-section">
       <div class="module-header">
         <div>
-          <span class="module-label">CARDS</span>
+          <span class="module-label">Cards</span>
           <h2>Post cards</h2>
         </div>
-        <span class="status-chip">GRID</span>
+        <span class="status-chip">Grid</span>
       </div>
       <div class="blog-grid">
         {secondPost && <PostCard post={secondPost} />}

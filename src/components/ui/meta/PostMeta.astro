@@ -17,8 +17,8 @@ const displayName = authorName || author.name;
   <div class="article-meta-card__author">
     <img src={author.avatar.src} alt={author.name} width="42" height="42" />
     <div>
-      <span class="module-label">AUTHOR</span>
-      <a href={`/blog/author/${slugify(displayName)}/`} class="block font-[var(--font-display)] font-bold text-[color:var(--color-text-primary)] no-underline">{displayName}</a>
+      <span class="module-label">Author</span>
+      <a href={`/blog/author/${slugify(displayName)}/`} class="article-meta-card__name no-underline">{displayName}</a>
     </div>
   </div>
   <dl>

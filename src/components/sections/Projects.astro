@@ -17,10 +17,10 @@ const projectItems = projects.map((project) => ({
 <section class="dev-section" aria-labelledby="projects-title">
   <div class="module-header">
     <div>
-      <span class="module-label">OUTPUT</span>
+      <span class="module-label">Projects</span>
       <h2 id="projects-title">{title}</h2>
     </div>
-    <span class="status-chip">{projectItems.length} BUILDS</span>
+    <span class="status-chip">{projectItems.length} builds</span>
   </div>
   <p class="section-copy">{description}</p>
 
@@ -28,8 +28,8 @@ const projectItems = projects.map((project) => ({
     {projectItems.map((project) => (
       <article class="module-card project-card">
         <div class="project-card__topline">
-          <span>{project.date || "RECENT"}</span>
-          <strong>PROJECT</strong>
+          <span>{project.date || "Recent"}</span>
+          <strong>Project</strong>
         </div>
         <div class="project-card__icon" aria-hidden="true" set:html={project.icon} />
         <h3>{project.title}</h3>

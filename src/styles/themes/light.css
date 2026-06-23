@@ -1,17 +1,17 @@
 [data-theme="light"] {
-  --accent: #156f52;
-  --accent-dark: #0d4936;
-  --accent-rgb: 21, 111, 82;
-  --accent-alt: #b35b00;
-  --accent-alt-soft: #fff0d8;
-  --accent-blue: #1f5f9f;
+  --accent: #2f6b5f;
+  --accent-dark: #163d36;
+  --accent-rgb: 47, 107, 95;
+  --accent-alt: #4b5f8f;
+  --accent-alt-soft: #eef2f8;
+  --accent-blue: #496a92;
 
   --black: 17, 24, 39;
-  --gray: 91, 103, 122;
-  --gray-light: 224, 229, 236;
-  --gray-dark: 38, 47, 63;
+  --gray: 96, 105, 117;
+  --gray-light: 224, 226, 230;
+  --gray-dark: 34, 39, 48;
 
-  --background: #f8fafc;
+  --background: #f7f8fa;
   --foreground: #111827;
   --card: #ffffff;
   --card-foreground: #111827;
@@ -19,9 +19,9 @@
   --popover-foreground: #111827;
   --primary: var(--accent);
   --primary-foreground: #ffffff;
-  --secondary: #f59e0b;
+  --secondary: #4b5f8f;
   --secondary-foreground: #111827;
-  --muted: #eef2f7;
+  --muted: #eef0f3;
   --muted-foreground: #5b677a;
   --accent-foreground: #ffffff;
 
@@ -29,15 +29,15 @@
   --color-text-secondary: rgb(var(--gray-dark));
   --color-text-muted: rgb(var(--gray));
   --color-bg-primary: var(--background);
-  --color-bg-secondary: #eef2f7;
-  --color-bg-tertiary: #e5ebf2;
-  --color-grid-line: rgba(17, 24, 39, 0.075);
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #eef0f3;
+  --color-grid-line: rgba(17, 24, 39, 0);
   --color-code-bg: #f1f5f9;
   --color-terminal-bg: #111827;
   --color-terminal-text: #e5f6ee;
 
-  --color-border: rgba(17, 24, 39, 0.2);
-  --color-border-light: rgba(17, 24, 39, 0.12);
+  --color-border: rgba(17, 24, 39, 0.12);
+  --color-border-light: rgba(17, 24, 39, 0.08);
 
   --info: #2f80c1;
   --info-foreground: #082f49;
@@ -57,11 +57,10 @@
   --radius-lg: 8px;
   --radius-2xl: 8px;
 
-  --shadow-sm: 0 1px 0 rgba(17, 24, 39, 0.08);
-  --shadow-md: 0 1px 0 rgba(17, 24, 39, 0.08);
-  --shadow-lg: 0 8px 24px rgba(17, 24, 39, 0.09);
-  --shadow-xl: 0 14px 36px rgba(17, 24, 39, 0.11);
-  --shadow-2xl: 0 20px 50px rgba(17, 24, 39, 0.12);
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-md: 0 10px 30px rgba(17, 24, 39, 0.06);
+  --shadow-lg: 0 18px 44px rgba(17, 24, 39, 0.08);
+  --shadow-xl: 0 24px 60px rgba(17, 24, 39, 0.1);
+  --shadow-2xl: 0 32px 80px rgba(17, 24, 39, 0.12);
   --box-shadow: var(--shadow-md);
 }
-
