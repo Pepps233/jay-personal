@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostCard from '../ui/card/PostCard.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  title?: string;
+  label?: string;
+}
+
+const { posts = [], title = 'All posts', label = 'OUTPUT' } = Astro.props as Props;
+---
+
+<section class="blog-list-module">
+  <div class="module-header">
+    <div>
+      <span class="module-label">{label}</span>
+      <h2>{title}</h2>
+    </div>
+    <span class="status-chip">{posts.length} ITEMS</span>
+  </div>
+  <div class="blog-grid">
+    {posts.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+</section>

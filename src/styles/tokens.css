@@ -1,6 +1,6 @@
 :root {
-  --skill-icon-bg: rgba(106, 113, 114, 0.16); /* faint blue @ 8% opacity */
-  --tag-pill-bg: rgba(59, 130, 246, 0.10);   /* example blue */
-  --tag-pill-border: rgba(59, 130, 246, 0.28);
-  --tag-pill-text: #3b82f6;
+  --skill-icon-bg: rgba(30, 105, 85, 0.1);
+  --tag-pill-bg: rgba(30, 105, 85, 0.08);
+  --tag-pill-border: rgba(30, 105, 85, 0.22);
+  --tag-pill-text: #145a46;
 }

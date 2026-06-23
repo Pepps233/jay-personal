@@ -1,25 +1,30 @@
 ---
 import type { LogoItem } from '../../../data/logos';
 
-interface Props { tools: LogoItem[]; speedMs?: number; }
-const { tools = [], speedMs = 30000 } = Astro.props as Props;
+interface Props {
+  tools: LogoItem[];
+  speedMs?: number;
+}
+
+const { tools = [], speedMs = 36000 } = Astro.props as Props;
 ---
 
-<div class="overflow-hidden relative z-10 mx-auto px-8 py-4">
-  <div class="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-    <div class="flex will-change-transform w-max translate-x-0" style={`animation: carousel-scroll ${speedMs}ms linear infinite`}>
-      {[...tools, ...tools].map((tool) => (
-        <div class="group flex flex-col items-center justify-center px-6 py-7 mx-4 min-w-[160px] md:min-w-[180px] rounded-lg">
-          <div class="w-10 h-10 mb-2 flex items-center justify-center">
-            <img src={tool.logo} alt={tool.name} width="40" height="40" class="w-full h-full object-contain transition duration-300 group-hover:scale-110 light:grayscale light:opacity-80" />
-          </div>
-          <span class="text-sm font-semibold text-[color:var(--color-text-muted)] transition-colors">{tool.name}</span>
+<div class="overflow-hidden relative z-10 mx-auto py-3">
+  <div class="flex will-change-transform w-max translate-x-0" style={`animation: carousel-scroll ${speedMs}ms linear infinite`}>
+    {[...tools, ...tools].map((tool) => (
+      <div class="group flex min-w-[150px] items-center gap-3 border-r border-[color:var(--color-border-light)] px-5 py-4">
+        <div class="flex h-9 w-9 items-center justify-center border border-[color:var(--color-border-light)] bg-[color:var(--color-bg-secondary)] p-1.5">
+          <img src={tool.logo} alt={tool.name} width="32" height="32" class="h-full w-full object-contain transition duration-200 group-hover:scale-105" />
         </div>
-      ))}
-    </div>
+        <span class="font-[var(--font-display)] text-sm font-bold text-[color:var(--color-text-muted)]">{tool.name}</span>
+      </div>
+    ))}
   </div>
 </div>
 
 <style>
-@keyframes carousel-scroll { 0% { transform: translateX(-20%); } 100% { transform: translateX(-70%); } }
+@keyframes carousel-scroll {
+  0% { transform: translateX(-20%); }
+  100% { transform: translateX(-70%); }
+}
 </style>

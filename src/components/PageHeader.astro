@@ -1,0 +1,31 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  description?: string;
+  meta?: string[];
+}
+
+const { label = 'OUTPUT', title, description, meta = [] } = Astro.props as Props;
+---
+
+<section class="page-header">
+  <div class="module-label">{label}</div>
+  <div class="page-header__grid">
+    <div>
+      <h1>{title}</h1>
+      {description && <p>{description}</p>}
+    </div>
+    {meta.length > 0 && (
+      <dl class="page-header__meta">
+        {meta.map((item, index) => (
+          <>
+            <dt>{String(index + 1).padStart(2, '0')}</dt>
+            <dd>{item}</dd>
+          </>
+        ))}
+      </dl>
+    )}
+  </div>
+  <slot />
+</section>

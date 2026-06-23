@@ -1,0 +1,31 @@
+---
+import type { ImageMetadata } from 'astro';
+import BaseHead from './BaseHead.astro';
+import Header from './sections/Header.astro';
+import Footer from './sections/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+  mainClass?: string;
+}
+
+const { title, description, image, mainClass } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="site-grid-bg" aria-hidden="true"></div>
+    <Header />
+    <main class:list={['use-utility-layout', 'site-main', mainClass]}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

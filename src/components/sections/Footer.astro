@@ -1,55 +1,28 @@
 ---
 const today = new Date();
-import contactIconRaw from "../../assets/icons/contact-icon.svg?raw";
-import Button from "../ui/button/Button.astro";
-
-function sanitizeToWhite(svg: string, size = 18) {
-  let s = svg
-    .replace(/<\?xml[\s\S]*?\?>/g, "")
-    .replace(/<!--([\s\S]*?)-->/g, "")
-    .replace(/width=\"[^\"]*\"/g, "")
-    .replace(/height=\"[^\"]*\"/g, "")
-    // Ensure shapes are visible: use white via currentColor on fill, drop strokes
-    .replace(/fill=\"[^\"]*\"/gi, 'fill="currentColor"')
-    .replace(/stroke=\"[^\"]*\"/gi, 'stroke="none"');
-  s = s.replace(/<svg([^>]*)>/, (m, attrs) => `<svg${attrs} width="${size}" height="${size}">`);
-  return s;
-}
-
-const contactIcon = sanitizeToWhite(contactIconRaw);
-const feedUrl = new URL('rss.xml', Astro.site).toString();
-const feedlyUrl = `https://www.linkedin.com/in/yujay1/`;
-const inoreaderUrl = `https://github.com/Pepps233`;
 ---
 
-<footer id="contact" class="py-12 px-4 text-center">
-  <h2 class="text-2xl md:text-3xl font-semibold text-foreground">Want to work with me?</h2>
-  <p class="mt-2 text-[color:var(--color-text-muted)]">Imagine. Build. Transform. Make the future real.</p>
-  <div class="mt-6 flex justify-center">
-    <Button href="mailto:jialey2025@gmail.com" variant="secondary" size="md" >
-      <span class="inline-flex" aria-hidden="true" set:html={contactIcon} />
-      Get in touch
-    </Button>
+<footer id="contact" class="dev-footer">
+  <div class="dev-footer__grid">
+    <div>
+      <span class="module-label">CONTACT</span>
+      <h2>Build something useful.</h2>
+      <p>
+        I work across backend systems, ML tooling, robotics software, and student-focused products.
+        Reach out for projects, research, internships, or founder conversations.
+      </p>
+    </div>
+    <div class="dev-footer__links">
+      <a class="dev-button dev-button--primary" href="mailto:jialey2025@gmail.com">Email</a>
+      <a class="dev-button" href="https://github.com/Pepps233" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="dev-button" href="https://www.linkedin.com/in/yujay1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="dev-button" href="/blog/">Blog</a>
+    </div>
   </div>
-  <!-- <div class="mt-6 text-sm text-[color:var(--color-text-muted)]">Credits: <a href="https://guihubie.com" class="hover:text-[color:var(--accent)]">guihubie</a>.</div> -->
-  <div class="mt-6 flex items-center justify-center gap-4 text-sm">
-    <a class="sw-btn-sm" href={feedlyUrl} target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">LinkedIn</a>
-    <a class="sw-btn-sm" href={inoreaderUrl} target="_blank" rel="noopener noreferrer" aria-label="Connect on Github">Github</a>
-    <!-- <button class="sw-btn-sm" type="button" data-copy={feedUrl} aria-label="Copy RSS link">Copy RSS link</button> -->
-    <a class="sw-btn-sm" href="/blog/" aria-label="Browse all posts">All posts</a>
+  <div class="pixel-divider" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-  <script type="module">
-    document.addEventListener('click', (e) => {
-      const target = e.target;
-      if (!(target instanceof HTMLElement)) return;
-      if (target.matches('button[data-copy]')) {
-        const url = target.getAttribute('data-copy');
-        if (!url) return;
-        navigator.clipboard?.writeText(url);
-        const original = target.textContent || 'Copy RSS link';
-        target.textContent = 'Copied!';
-        setTimeout(() => { target.textContent = original; }, 1500);
-      }
-    });
-  </script>
+  <p class="text-sm text-[color:var(--color-text-muted)]">Jay Yu / {today.getFullYear()}</p>
 </footer>

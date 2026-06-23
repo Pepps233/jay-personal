@@ -1,4 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
 // @ts-check
 
 import mdx from '@astrojs/mdx';

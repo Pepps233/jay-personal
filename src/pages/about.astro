@@ -1,24 +1,47 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
-import GlowLineSeparator from '@/components/ui/separator/GlowLineSeparator.astro';
-const pageTitle = 'About Me';
-const pageDescription = 'Learn more about my background and approach to software engineering.';
+import SiteShell from '../components/SiteShell.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
-<Layout title={pageTitle} description={pageDescription} pubDate={new Date()} showHeader={false}>
-    <p>
-        Hey! I'm a Computer Science student at Purdue University and an aspiring software engineer passionate about building technology that makes a real-world impact.
-    </p>
-    <p>
-        I work across the stack with Java, Python, React.js, Spring Boot, Node.js, and PostgreSQL. I care deeply about writing clean, maintainable code, implementing strong testing practices, and developing reliable tools that people can depend on. My approach: prototype quickly, iterate thoughtfully, and measure real-world results.
-    </p>
-    <p>
-        Recent highlights include refining a model using LoRA, developing vision-based robot localization systems, programming high-accuracy autonomous sequences, and building machine learning models for accessibility projects such as real-time ASL translation.
-    </p>
-    <p>
-        Outside of coding, I enjoy reading research papers on large language models, exploring new areas of artificial intelligence, and attending tech-related events. Always learning—and always excited to tackle meaningful technical challenges.
-    </p>
+<SiteShell title="About Jay Yu" description="About Jay Yu, a Purdue computer science student, founder, and software builder.">
+  <PageHeader
+    label="README"
+    title="About"
+    description="I am a Purdue computer science student building useful software across backend systems, machine learning, robotics, and student products."
+    meta={["Purdue CS", "LuntraHub", "ML and robotics"]}
+  />
 
-  <GlowLineSeparator />
-
-</Layout>
+  <section class="dev-section">
+    <div class="module-header">
+      <div>
+        <span class="module-label">PROFILE</span>
+        <h2>README.md</h2>
+      </div>
+      <span class="status-chip">ACTIVE</span>
+    </div>
+    <div class="prose">
+      <p>
+        Hey, I am Jay.
+        I study Computer Science at Purdue University and care about building technical systems that survive real use.
+      </p>
+      <p>
+        My work spans Java, Python, React, Spring Boot, Node.js, PostgreSQL, TensorFlow, OpenCV, and robotics software.
+        I like clean interfaces, strong feedback loops, reliable tests, and code that can be maintained after the first demo works.
+      </p>
+      <p>
+        Recent work includes LoRA model refinement, vision-based robot localization, autonomous robotics sequences, real-time ASL translation, and LuntraHub, a student connection and tutor discovery platform.
+      </p>
+      <h2>Operating principles</h2>
+      <ul>
+        <li>Prototype quickly, then simplify the system until the important parts are obvious.</li>
+        <li>Measure real behavior, not just local happy paths.</li>
+        <li>Use the smallest architecture that can stay reliable as the product grows.</li>
+        <li>Keep learning from research, production constraints, and users in the loop.</li>
+      </ul>
+      <h2>Now</h2>
+      <p>
+        I am focused on Purdue CS, LuntraHub, ML and robotics projects, and publishing technical notes from the systems I am building.
+      </p>
+    </div>
+  </section>
+</SiteShell>
