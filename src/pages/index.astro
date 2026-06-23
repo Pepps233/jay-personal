@@ -2,13 +2,17 @@
 import SiteShell from '../components/SiteShell.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
-const links = [
+const primaryLinks = [
   { label: 'blog', href: '/blog/' },
   { label: 'projects', href: '/projects/' },
   { label: 'about', href: '/about/' },
   { label: 'github', href: 'https://github.com/Pepps233', external: true },
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/yujay1/', external: true },
+];
+
+const socialLinks = [
   { label: 'email', href: 'mailto:jialey2025@gmail.com' },
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/yujay1/', external: true },
+  { label: 'x', href: 'https://x.com/pepps233', external: true },
 ];
 ---
 
@@ -22,6 +26,7 @@ const links = [
       sameAs: [
         'https://github.com/Pepps233',
         'https://www.linkedin.com/in/yujay1/',
+        'https://x.com/pepps233',
       ],
     })} />
   </Fragment>
@@ -29,8 +34,19 @@ const links = [
   <section class="landing-home" aria-labelledby="home-title">
     <h1 id="home-title">Hello</h1>
     <p class="landing-name">Jay Yu</p>
-    <nav class="landing-links" aria-label="Primary pages">
-      {links.map((link) => (
+    <nav class="landing-links landing-links--primary" aria-label="Primary pages">
+      {primaryLinks.map((link) => (
+        <a
+          href={link.href}
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
+        >
+          [{link.label}]
+        </a>
+      ))}
+    </nav>
+    <nav class="landing-links landing-links--social" aria-label="Social links">
+      {socialLinks.map((link) => (
         <a
           href={link.href}
           target={link.external ? '_blank' : undefined}
