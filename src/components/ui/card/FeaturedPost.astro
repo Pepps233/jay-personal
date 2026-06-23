@@ -4,45 +4,43 @@ import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../../FormattedDate.astro';
 import { slugifyTag as slugify } from '../../../lib/slug';
 
-interface Props { post: CollectionEntry<'blog'>; readingTimeMin?: number }
+interface Props {
+  post: CollectionEntry<'blog'>;
+  readingTimeMin?: number;
+}
+
 const { post, readingTimeMin = 0 } = Astro.props as Props;
+const tags = post.data.tags || [];
 ---
-<div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-stretch relative">
+
+<article class="module-card featured-post">
   {post.data.heroImage && (
-    <div class="md:col-span-1 relative overflow-hidden rounded-lg">
-      <div class="aspect-[16/9] w-full min-h-featured">
-        <Image class="w-full h-full object-cover" width={1200} height={630} src={post.data.heroImage} alt={post.data.title} />
-      </div>
+    <div class="featured-post__image">
+      <Image width={1200} height={675} src={post.data.heroImage} alt={post.data.title} />
     </div>
   )}
-  <div class="md:col-span-2 space-y-2 md:space-y-3">
-    <div class="flex items-center gap-2 text-xs uppercase tracking-wide text-[color:var(--color-text-muted)]">
-      <span class="sw-tag border border-[color:var(--color-border-light)]"><span class="text-[color:var(--accent)]">★</span> Featured</span>
+  <div class="featured-post__body">
+    <div class="post-card__meta">
+      <span>Featured</span>
+      <span><FormattedDate date={post.data.pubDate} /></span>
+      {readingTimeMin > 0 && <span>{readingTimeMin} min read</span>}
     </div>
-    <h3 class="text-2xl md:text-3xl font-bold text-[color:var(--color-text-primary)]">{post.data.title}</h3>
-    {post.data.description && <p class="text-[color:var(--color-text-secondary)]">{post.data.description}</p>}
-    <div class="flex items-center gap-3 text-sm text-[color:var(--color-text-muted)]">
-      <FormattedDate date={post.data.pubDate} />
-      <span>•</span>
-		<a href={`/blog/author/${slugify(post.data.author || 'Jay Yu')}/`} class="hover:text-[color:var(--accent)]">{post.data.author || 'Jay Yu'}</a>
-      {readingTimeMin > 0 && (<>
-        <span>•</span>
-        <span class="flex items-center gap-1">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 7v5l3 3"/>
-          </svg>
-          {readingTimeMin} min read
-        </span>
-      </>)}
+    <h3>{post.data.title}</h3>
+    {post.data.description && <p>{post.data.description}</p>}
+    <div class="post-card__meta mt-4">
+      <a href={`/blog/author/${slugify(post.data.author || 'Jay Yu')}/`} class="interactive-link">{post.data.author || 'Jay Yu'}</a>
+      {post.data.category && <span>{post.data.category}</span>}
     </div>
-    {post.data.tags && post.data.tags.length > 0 && (
-      <div class="flex gap-2 flex-wrap">
-        {post.data.tags.map((t) => <a href={`/blog/tag/${t.replace(/\s+/g,'-').toLowerCase()}/`} class="sw-tag">{t}</a>)}
+    {tags.length > 0 && (
+      <div class="post-card__tags">
+        {tags.map((tag) => (
+          <a href={`/blog/tag/${slugify(tag)}/`} class="sw-tag interactive-link">{tag}</a>
+        ))}
       </div>
     )}
+    <div class="card-actions">
+      <a class="dev-button dev-button--primary interactive-link" href={`/blog/${post.id}/`}>Read post</a>
+    </div>
   </div>
-  <a href={`/blog/${post.id}/`} class="stretched-link" aria-label={post.data.title}></a>
-</div>
-
-
+  <a href={`/blog/${post.id}/`} class="stretched-link" aria-label={`Read ${post.data.title}`}></a>
+</article>

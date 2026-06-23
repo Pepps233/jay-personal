@@ -1,7 +1,4 @@
 ---
-import Timeline from "../ui/timeline/Timeline.astro";
-import { workIcons } from "../../data/work";
-
 interface ExperienceItem {
   title: string;
   company: string;
@@ -16,15 +13,43 @@ interface Props {
   title?: string;
 }
 
-const { items, title } = Astro.props as Props;
+const { items, title = "Experience" } = Astro.props as Props;
 ---
 
-<section class="w-full py-8">
-  <div class="mx-auto max-w-6xl px-5 md:px-6">
-    {title && (
-      <h2 class="text-3xl md:text-4xl font-semibold text-center mb-10 text-foreground">{title}</h2>
-    )}
+<section class="dev-section" aria-labelledby="work-title">
+  <div class="module-header">
+    <div>
+      <span class="module-label">Work</span>
+      <h2 id="work-title">{title}</h2>
+    </div>
+    <span class="status-chip">{items.length} items</span>
+  </div>
 
-    <Timeline items={items} icons={workIcons} centered={false}/>
+  <div class="work-log">
+    {items.map((item) => (
+      <article class="module-card work-card">
+        <div class="work-card__rail" aria-hidden="true"></div>
+        <div>
+          <div class="project-card__topline">
+            <span>{item.date || "Now"}</span>
+            <strong>{item.region || "Remote"}</strong>
+          </div>
+          <h3>{item.title}</h3>
+          <p class="work-card__company">{item.company}</p>
+          <ul>
+            {item.description.map((desc) => (
+              <li>{desc}</li>
+            ))}
+          </ul>
+          {item.technologies && item.technologies.length > 0 && (
+            <div class="chip-row">
+              {item.technologies.map((tech) => (
+                <span class="tech-chip">{tech}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      </article>
+    ))}
   </div>
 </section>

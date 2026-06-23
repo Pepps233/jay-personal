@@ -1,0 +1,37 @@
+---
+interface StatusItem {
+  label: string;
+  title: string;
+  description: string;
+  signal: string;
+}
+
+interface Props {
+  items: StatusItem[];
+  title?: string;
+}
+
+const { items, title = 'Current focus' } = Astro.props as Props;
+---
+
+<section class="status-panel" aria-labelledby="status-panel-title">
+  <div class="module-header">
+    <div>
+      <span class="module-label">Status</span>
+      <h2 id="status-panel-title">{title}</h2>
+    </div>
+    <span class="status-chip">{items.length} active</span>
+  </div>
+  <div class="status-grid">
+    {items.map((item) => (
+      <article class="module-card status-card">
+        <div class="status-card__topline">
+          <span>{item.label}</span>
+          <strong>{item.signal}</strong>
+        </div>
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
+      </article>
+    ))}
+  </div>
+</section>

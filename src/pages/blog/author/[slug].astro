@@ -1,41 +1,31 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../../../components/BaseHead.astro';
-import Header from '../../../components/sections/Header.astro';
-import Footer from '../../../components/sections/Footer.astro';
-import PostCard from '../../../components/ui/card/PostCard.astro';
+import SiteShell from '../../../components/SiteShell.astro';
+import BlogLogHeader from '../../../components/blog/BlogLogHeader.astro';
+import BlogPostList from '../../../components/blog/BlogPostList.astro';
 import { slugifyTag as slugify } from '../../../lib/slug';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   const authorSlugs = [
-    ...new Set(
-      posts.map((p) => slugify(p.data.author || 'Jay Yu'))
-    ),
+    ...new Set(posts.map((post) => slugify(post.data.author || 'Jay Yu'))),
   ];
   return authorSlugs.map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
-const posts = (await getCollection('blog')).filter((p) => slugify(p.data.author || 'Jay Yu') === slug);
+const posts = (await getCollection('blog'))
+  .filter((post) => slugify(post.data.author || 'Jay Yu') === slug)
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
 const authorName = posts[0]?.data.author || 'Jay Yu';
 ---
-<html lang="en" data-theme="dark" class="dark">
-  <head>
-    <BaseHead title={`Articles by ${authorName}`} description={`Posts written by ${authorName}`} />
-  </head>
-  <body>
-    <Header />
-    <main class="mx-auto max-w-6xl px-4 py-10 space-y-6">
-      <h1 class="text-3xl font-bold">Blogs by {authorName}</h1>
-      <div class="blog-grid">
-        {posts.map((p) => (
-          <PostCard post={p} />
-        ))}
-      </div>
-    </main>
-    <Footer />
-  </body>
-</html>
 
-
+<SiteShell title={`Articles by ${authorName}`} description={`Posts written by ${authorName}.`}>
+  <BlogLogHeader
+    title={`Author / ${authorName}`}
+    description="A filtered author view."
+    label="Author"
+    count={posts.length}
+  />
+  <BlogPostList posts={posts} title="Posts" />
+</SiteShell>

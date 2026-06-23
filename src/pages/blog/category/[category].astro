@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../../../components/BaseHead.astro';
-import Header from '../../../components/sections/Header.astro';
-import Footer from '../../../components/sections/Footer.astro';
-import PostCard from '../../../components/ui/card/PostCard.astro';
+import SiteShell from '../../../components/SiteShell.astro';
+import BlogLogHeader from '../../../components/blog/BlogLogHeader.astro';
+import BlogPostList from '../../../components/blog/BlogPostList.astro';
 import { getCategoryMeta, slugifyCategory } from '../../../data/categories';
 
 export async function getStaticPaths() {
@@ -11,8 +10,8 @@ export async function getStaticPaths() {
   const categories = [
     ...new Set(
       posts
-        .map((p) => p.data.category || null)
-        .filter((v): v is string => Boolean(v))
+        .map((post) => post.data.category || null)
+        .filter((value): value is string => Boolean(value))
         .map((name) => slugifyCategory(name))
     ),
   ];
@@ -20,30 +19,22 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.params;
-const posts = (await getCollection('blog')).filter((p) => slugifyCategory(p.data.category || '') === category);
+const posts = (await getCollection('blog'))
+  .filter((post) => slugifyCategory(post.data.category || '') === category)
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
 const meta = getCategoryMeta(category);
 ---
-<html lang="en" data-theme="dark" class="dark">
-  <head>
-    <BaseHead title={`${meta.title} - Category`} description={meta.description} />
+
+<SiteShell title={`${meta.title} - Category`} description={meta.description}>
+  <Fragment slot="head">
     <link rel="alternate" type="application/rss+xml" title={`Category: ${category} feed`} href={`/rss/category/${category}.xml`} />
-  </head>
-  <body>
-    <Header />
-    <main class="mx-auto max-w-6xl px-4 py-10 space-y-6">
-      <div class="flex items-center justify-between gap-3">
-        <h1 class="text-3xl font-bold">{meta.title}</h1>
-        <a class="sw-btn-sm" href={`/rss/category/${category}.xml`}>Subscribe</a>
-      </div>
-      <p class="text-[color:var(--color-text-muted)]">{meta.description}</p>
-      <div class="blog-grid">
-        {posts.map((p) => (
-          <PostCard post={p} />
-        ))}
-      </div>
-    </main>
-    <Footer />
-  </body>
-</html>
+  </Fragment>
 
-
+  <BlogLogHeader
+    title={meta.title}
+    description={meta.description}
+    label="Category"
+    count={posts.length}
+  />
+  <BlogPostList posts={posts} title="Category posts" />
+</SiteShell>

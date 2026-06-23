@@ -38,8 +38,9 @@ const imageUrl = new URL(image.src, siteOrigin).toString();
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+<link rel="preload" href="/fonts/manrope-400.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="/fonts/manrope-600.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="/fonts/manrope-800.ttf" as="font" type="font/ttf" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -47,9 +48,8 @@ const imageUrl = new URL(image.src, siteOrigin).toString();
 <!-- Robots -->
 <meta name="robots" content="index,follow,max-image-preview:large" />
 
-<!-- Theme color (supports dark/light) -->
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0b" />
+<!-- Theme color -->
+<meta name="theme-color" content="#f8fafc" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

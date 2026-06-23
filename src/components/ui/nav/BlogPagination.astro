@@ -13,19 +13,18 @@ const nextHref = currentPage < totalPages ? `${basePath}/${currentPage + 1}/` : 
 {totalPages > 1 && (
   <nav class="mt-6 flex items-center justify-center gap-3" aria-label="Pagination">
     {prevHref ? (
-      <a href={prevHref} class="sw-btn">Previous</a>
+      <a href={prevHref} class="dev-button">Previous</a>
     ) : (
-      <span class="sw-btn" style="opacity:.5; pointer-events:none;">Previous</span>
+      <span class="dev-button" style="opacity:.5; pointer-events:none;">Previous</span>
     )}
-    <span class="text-sm text-[color:var(--color-text-muted)]">
+    <span class="status-chip">
       Page {currentPage} of {totalPages}
     </span>
     {nextHref ? (
-      <a href={nextHref} class="sw-btn">Next</a>
+      <a href={nextHref} class="dev-button">Next</a>
     ) : (
-      <span class="sw-btn" style="opacity:.5; pointer-events:none;">Next</span>
+      <span class="dev-button" style="opacity:.5; pointer-events:none;">Next</span>
     )}
   </nav>
 )}
-
 
