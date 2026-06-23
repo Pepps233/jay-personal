@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import SiteShell from '../components/SiteShell.astro';
 import PostMeta from '../components/ui/meta/PostMeta.astro';
-import ShareButtons from '../components/ui/share/ShareButtons.astro';
 import PostNav from '../components/ui/nav/PostNav.astro';
 import { slugifyTag } from '../lib/slug';
 
@@ -90,8 +89,13 @@ const authorName = Astro.props.author || 'Jay Yu';
 
     <div class="article-grid">
       <div class="article-aside">
-        <PostMeta pubDate={pubDate} readingTimeMin={readingTimeMin} authorName={authorName} />
-        <ShareButtons title={title} url={Astro.url.toString()} />
+        <PostMeta
+          pubDate={pubDate}
+          readingTimeMin={readingTimeMin}
+          authorName={authorName}
+          title={title}
+          url={Astro.url.toString()}
+        />
       </div>
       <div class="prose article-prose">
         <slot />

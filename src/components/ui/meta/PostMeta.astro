@@ -2,14 +2,17 @@
 import { author } from '../../../data/author';
 import FormattedDate from '../../FormattedDate.astro';
 import { slugifyTag as slugify } from '../../../lib/slug';
+import ShareButtons from '../share/ShareButtons.astro';
 
 interface Props {
   pubDate: Date;
   readingTimeMin: number;
   authorName?: string;
+  title: string;
+  url: string;
 }
 
-const { pubDate, readingTimeMin, authorName } = Astro.props as Props;
+const { pubDate, readingTimeMin, authorName, title, url } = Astro.props as Props;
 const displayName = authorName || author.name;
 ---
 
@@ -27,4 +30,5 @@ const displayName = authorName || author.name;
     <dt>Read</dt>
     <dd>{readingTimeMin} min</dd>
   </dl>
+  <ShareButtons title={title} url={url} />
 </aside>

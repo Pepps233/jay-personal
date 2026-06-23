@@ -101,14 +101,6 @@ body.landing-page {
 	overflow: hidden;
 }
 
-@media (max-width: 720px) {
-	body.landing-page {
-		position: fixed;
-		inset: 0;
-		width: 100%;
-	}
-}
-
 main:not(.use-utility-layout) {
 	width: 1280px;
 	max-width: calc(100% - 2rem);
