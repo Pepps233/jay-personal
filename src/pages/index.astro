@@ -35,22 +35,24 @@ const socialLinks = [
     <h1 id="home-title">Hello</h1>
     <p class="landing-name">Jay Yu</p>
     <nav class="landing-links landing-links--primary" aria-label="Primary pages">
-      {primaryLinks.map((link) => (
+      {primaryLinks.map((link, index) => (
         <a
           href={link.href}
           target={link.external ? '_blank' : undefined}
           rel={link.external ? 'noopener noreferrer' : undefined}
+          style={`--landing-item-index: ${index};`}
         >
           [{link.label}]
         </a>
       ))}
     </nav>
     <nav class="landing-links landing-links--social" aria-label="Social links">
-      {socialLinks.map((link) => (
+      {socialLinks.map((link, index) => (
         <a
           href={link.href}
           target={link.external ? '_blank' : undefined}
           rel={link.external ? 'noopener noreferrer' : undefined}
+          style={`--landing-item-index: ${index};`}
         >
           [{link.label}]
         </a>
