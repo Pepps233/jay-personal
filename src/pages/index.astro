@@ -14,9 +14,21 @@ const socialLinks = [
   { label: 'email', href: 'mailto:jialey2025@gmail.com' },
   { label: 'x', href: 'https://x.com/pepps233', external: true },
 ];
+
+const currentlyItems = [
+  { label: 'working on', text: 'diffex ai', href: 'https://diffex.ai/', external: true },
+  { label: 'cool reads', text: 'Agent Loops', href: 'https://x.com/0xCodez/status/2064374643729773029', external: true },
+  { label: 'last book', text: 'To Live, Yu Hua', href: '/blog/' },
+];
 ---
 
-<SiteShell title={SITE_TITLE} description={SITE_DESCRIPTION} mainClass="landing-main" showFooter={false}>
+<SiteShell
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  bodyClass="landing-page"
+  mainClass="landing-main"
+  showFooter={false}
+>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -46,6 +58,20 @@ const socialLinks = [
         </a>
       ))}
     </nav>
+    <div class="landing-currently" aria-label="Current notes">
+      {currentlyItems.map((item, index) => (
+        <p style={`--landing-item-index: ${index};`}>
+          <span>[{item.label}]:</span>
+          <a
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+          >
+            {item.text}
+          </a>
+        </p>
+      ))}
+    </div>
     <nav class="landing-links landing-links--social" aria-label="Social links">
       {socialLinks.map((link, index) => (
         <a

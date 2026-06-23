@@ -7,11 +7,12 @@ interface Props {
   title: string;
   description: string;
   image?: ImageMetadata;
+  bodyClass?: string;
   mainClass?: string;
   showFooter?: boolean;
 }
 
-const { title, description, image, mainClass, showFooter = true } = Astro.props as Props;
+const { title, description, image, bodyClass, mainClass, showFooter = true } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -20,7 +21,7 @@ const { title, description, image, mainClass, showFooter = true } = Astro.props 
     <BaseHead title={title} description={description} image={image} />
     <slot name="head" />
   </head>
-  <body>
+  <body class:list={[bodyClass]}>
     <div class="site-grid-bg" aria-hidden="true"></div>
     <main class:list={['use-utility-layout', 'site-main', mainClass]}>
       <slot />
