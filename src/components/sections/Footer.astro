@@ -1,20 +1,41 @@
 ---
 const today = new Date();
+
+const contactLinks = [
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/yujay1/', external: true },
+  { label: 'github', href: 'https://github.com/Pepps233', external: true },
+  { label: 'email', href: 'mailto:jialey2025@gmail.com' },
+  { label: 'x', href: 'https://x.com/pepps233', external: true },
+];
+
+const footerLinks = [
+  { label: 'about', href: '/about/' },
+  { label: 'blog', href: '/blog/' },
+  { label: 'projects', href: '/projects/' },
+  { label: 'home', href: '/' },
+];
 ---
 
 <footer id="contact" class="dev-footer">
   <div class="dev-footer__grid">
     <div>
       <a class="footer-home no-underline" href="/">Jay Yu</a>
-      <p>Notes, projects, and contact links.</p>
+      <div class="dev-footer__contact" aria-label="Contact links">
+        {contactLinks.map((link) => (
+          <a
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
+          >
+            [{link.label}]
+          </a>
+        ))}
+      </div>
     </div>
     <div class="dev-footer__links">
-      <a href="/blog/">[blog]</a>
-      <a href="/projects/">[projects]</a>
-      <a href="/about/">[about]</a>
-      <a href="mailto:jialey2025@gmail.com">[email]</a>
-      <a href="https://github.com/Pepps233" target="_blank" rel="noopener noreferrer">[github]</a>
-      <a href="https://www.linkedin.com/in/yujay1/" target="_blank" rel="noopener noreferrer">[linkedin]</a>
+      {footerLinks.map((link) => (
+        <a href={link.href}>[{link.label}]</a>
+      ))}
     </div>
   </div>
   <p class="text-sm text-[color:var(--color-text-muted)]">Jay Yu / {today.getFullYear()}</p>
