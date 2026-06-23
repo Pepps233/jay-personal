@@ -29,7 +29,6 @@ const meta = getTagMeta(tag);
     description={meta.description}
     label="Tag"
     count={posts.length}
-    feedHref={`/rss/tag/${tag}.xml`}
   />
   <BlogPostList posts={posts} title="Tagged posts" />
 </SiteShell>

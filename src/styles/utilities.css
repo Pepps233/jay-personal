@@ -452,6 +452,22 @@
   color: var(--color-text-muted);
 }
 
+.about-profile {
+  display: grid;
+  gap: 14px;
+  margin-bottom: clamp(24px, 4vw, 36px);
+}
+
+.about-profile__photo {
+  width: clamp(150px, 20vw, 230px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--color-border-light);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
 .project-card,
 .skill-card,
 .study-card {

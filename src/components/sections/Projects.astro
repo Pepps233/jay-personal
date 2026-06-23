@@ -8,7 +8,34 @@ interface Props {
 
 const { title = "Projects", description = "Selected builds with clear inputs, constraints, and outputs." } = Astro.props as Props;
 
-const projectItems = projects.map((project) => ({
+const monthRank = new Map(
+  [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ].map((month, index) => [month, index])
+);
+
+function projectDateRank(date?: string) {
+  if (!date) return Number.MAX_SAFE_INTEGER;
+
+  const [year, month] = date.split(/\s+/);
+  const parsedYear = Number(year);
+  const parsedMonth = monthRank.get(month) ?? 0;
+
+  return parsedYear * 12 + parsedMonth;
+}
+
+const projectItems = projects.slice().sort((a, b) => projectDateRank(b.date) - projectDateRank(a.date)).map((project) => ({
   ...project,
   technologies: project.techStack.split("•").map((item) => item.trim()).filter(Boolean),
 }));

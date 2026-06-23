@@ -5,10 +5,9 @@ interface Props {
   title?: string;
   subtitle?: string;
   count?: number;
-  feedHref?: string;
 }
 
-const { title = 'Blog', subtitle, count, feedHref } = Astro.props as Props;
+const { title = 'Blog', subtitle, count } = Astro.props as Props;
 ---
 
-<BlogLogHeader title={title} description={subtitle} count={count} feedHref={feedHref} />
+<BlogLogHeader title={title} description={subtitle} count={count} />

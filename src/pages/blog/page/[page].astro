@@ -40,7 +40,6 @@ const totalPages = Math.max(1, Math.ceil(rest.length / PAGE_SIZE));
     title={`Blog / Page ${currentPage}`}
     description="More notes and essays."
     count={pagePosts.length}
-    feedHref="/rss.xml"
   />
   <BlogPostList posts={pagePosts} title="Posts" />
   <BlogPagination currentPage={currentPage} totalPages={totalPages} />

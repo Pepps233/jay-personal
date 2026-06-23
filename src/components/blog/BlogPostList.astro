@@ -17,7 +17,6 @@ const { posts = [], title = 'All posts', label } = Astro.props as Props;
       {label && <span class="module-label">{label}</span>}
       <h2>{title}</h2>
     </div>
-    <span class="status-chip">{posts.length} posts</span>
   </div>
   <div class="blog-grid">
     {posts.map((post) => (

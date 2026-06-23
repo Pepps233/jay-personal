@@ -35,7 +35,6 @@ const meta = getCategoryMeta(category);
     description={meta.description}
     label="Category"
     count={posts.length}
-    feedHref={`/rss/category/${category}.xml`}
   />
   <BlogPostList posts={posts} title="Category posts" />
 </SiteShell>

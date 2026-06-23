@@ -6,15 +6,18 @@ import PageHeader from '../components/PageHeader.astro';
 <SiteShell title="About Jay Yu" description="A short profile for Jay Yu.">
   <PageHeader
     title="About"
-    description="A short profile and current focus."
+    description="A short profile for Jay Yu and current focus."
   />
 
   <section class="dev-section">
-    <div class="module-header">
-      <div>
-        <span class="module-label">Profile</span>
-        <h2>Jay Yu</h2>
-      </div>
+    <div class="about-profile" aria-label="Profile">
+      <img
+        class="about-profile__photo"
+        src="/images/about-page-photo.png"
+        alt="Jay Yu"
+        width="360"
+        height="360"
+      />
     </div>
     <div class="prose">
       <p>

@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import SiteShell from '../components/SiteShell.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import PostMeta from '../components/ui/meta/PostMeta.astro';
 import ShareButtons from '../components/ui/share/ShareButtons.astro';
 import PostNav from '../components/ui/nav/PostNav.astro';
@@ -69,21 +68,15 @@ const authorName = Astro.props.author || 'Jay Yu';
 
   <article class="article-shell">
     {showHeader && (
-      <header class:list={['module-card', 'article-hero', { 'article-hero--text-only': !heroImage }]}>
+      <header class:list={['article-hero', { 'article-hero--text-only': !heroImage }]}>
         {heroImage && (
           <div class="article-hero__media">
             <Image width={1280} height={720} src={heroImage} alt="" />
           </div>
         )}
         <div class="article-terminal">
-          <span class="status-chip status-chip--live">Post</span>
           <h1>{title}</h1>
           <p>{description}</p>
-          <div class="article-terminal__meta mt-5">
-            <span><FormattedDate date={pubDate} /></span>
-            {updatedDate && <span>Updated <FormattedDate date={updatedDate} /></span>}
-            <span>{readingTimeMin} min read</span>
-          </div>
           {tags.length > 0 && (
             <div class="chip-row">
               {tags.map((tag) => (
