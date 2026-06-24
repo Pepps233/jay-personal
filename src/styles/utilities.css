@@ -1145,7 +1145,7 @@
     grid-column: 1;
     grid-row: 3;
     justify-self: start;
-    align-self: end;
+    align-self: start;
     max-width: min(310px, 100%);
     margin-top: 0;
     text-align: left;
