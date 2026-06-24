@@ -1131,10 +1131,12 @@
 
   .landing-links--primary {
     grid-row: 4;
-    justify-self: start;
-    justify-content: flex-start;
+    width: 100%;
+    justify-self: stretch;
+    justify-content: flex-end;
     flex-direction: row;
     gap: 10px;
+    text-align: right;
   }
 
   .landing-currently {
