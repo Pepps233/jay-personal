@@ -30,6 +30,48 @@ const currentlyItems = [
   showFooter={false}
 >
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/clouds.png" type="image/png" fetchpriority="high" />
+    <style is:inline>
+      html.landing-bg-pending .landing-home h1,
+      html.landing-bg-pending .landing-name,
+      html.landing-bg-pending .landing-links a,
+      html.landing-bg-pending .landing-currently p {
+        opacity: 0;
+        transform: translateY(14px);
+        filter: blur(4px);
+        animation: none;
+      }
+    </style>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const backgroundImage = '/images/clouds.png';
+        const reveal = () => {
+          root.classList.remove('landing-bg-pending');
+          root.classList.add('landing-bg-loaded');
+        };
+
+        root.classList.add('landing-bg-pending');
+
+        const image = new Image();
+        image.decoding = 'async';
+        image.fetchPriority = 'high';
+        image.onload = () => {
+          if (typeof image.decode === 'function') {
+            image.decode().then(reveal, reveal);
+            return;
+          }
+
+          reveal();
+        };
+        image.onerror = reveal;
+        image.src = backgroundImage;
+
+        if (image.complete) {
+          image.onload();
+        }
+      })();
+    </script>
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Person',
