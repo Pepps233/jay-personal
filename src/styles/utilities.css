@@ -1130,12 +1130,14 @@
   }
 
   .landing-links--primary {
-    grid-row: 4;
+    grid-row: 5;
     width: 100%;
+    align-self: end;
     justify-self: stretch;
     justify-content: flex-end;
     flex-direction: row;
     gap: 10px;
+    margin-bottom: calc(10px - clamp(8px, 2vh, 14px));
     text-align: right;
   }
 
