@@ -2,12 +2,18 @@
 import SiteShell from "../components/SiteShell.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Projects from "../components/sections/Projects.astro";
+import { projects as projectEntries } from "../data/projects";
 ---
 
 <SiteShell title="Projects" description="Projects and build notes by Jay Yu.">
-  <PageHeader
-    title="Projects"
-    description="Build notes and shipped experiments."
-  />
-  <Projects title="Project log" />
+  <PageHeader title="Projects">
+    <div class="project-page-intro">
+      <p>
+        Personal projects where I explore ideas from research papers and build tools that started from my own needs.
+        For startup products, check out my <a href="/blog/">blog</a>.
+      </p>
+      <span class="status-chip">{projectEntries.length} builds</span>
+    </div>
+  </PageHeader>
+  <Projects />
 </SiteShell>
