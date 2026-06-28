@@ -1,13 +1,6 @@
 ---
 import { projects } from "../../data/projects";
 
-interface Props {
-  title?: string;
-  description?: string;
-}
-
-const { title = "Projects", description = "Selected builds with clear inputs, constraints, and outputs." } = Astro.props as Props;
-
 const monthRank = new Map(
   [
     "January",
@@ -28,11 +21,12 @@ const monthRank = new Map(
 function projectDateRank(date?: string) {
   if (!date) return Number.MAX_SAFE_INTEGER;
 
-  const [year, month] = date.split(/\s+/);
+  const [year, month, day] = date.split(/\s+/);
   const parsedYear = Number(year);
   const parsedMonth = monthRank.get(month) ?? 0;
+  const parsedDay = Number(day) || 1;
 
-  return parsedYear * 12 + parsedMonth;
+  return parsedYear * 372 + parsedMonth * 31 + parsedDay;
 }
 
 const projectItems = projects.slice().sort((a, b) => projectDateRank(b.date) - projectDateRank(a.date)).map((project) => ({
@@ -41,22 +35,12 @@ const projectItems = projects.slice().sort((a, b) => projectDateRank(b.date) - p
 }));
 ---
 
-<section class="dev-section" aria-labelledby="projects-title">
-  <div class="module-header">
-    <div>
-      <span class="module-label">Projects</span>
-      <h2 id="projects-title">{title}</h2>
-    </div>
-    <span class="status-chip">{projectItems.length} builds</span>
-  </div>
-  <p class="section-copy">{description}</p>
-
+<section class="dev-section" aria-label="Project cards">
   <div class="dashboard-grid">
     {projectItems.map((project) => (
       <article class="module-card project-card">
         <div class="project-card__topline">
           <span>{project.date || "Recent"}</span>
-          <strong>Project</strong>
         </div>
         <div class="project-card__icon" aria-hidden="true" set:html={project.icon} />
         <h3>{project.title}</h3>
