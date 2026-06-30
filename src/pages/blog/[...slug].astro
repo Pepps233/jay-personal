@@ -1,29 +1,63 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import { getBlogPostGroups, getBlogLanguageMeta, type BlogPostGroup } from '../../lib/blog';
 import { calculateReadingTimeFromMarkdown } from '../../lib/reading';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = await getBlogPostGroups();
 	return posts.map((post) => ({
-		params: { slug: post.id },
+		params: { slug: post.slug },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = BlogPostGroup;
 
-const post = Astro.props;
-const posts = await getCollection('blog');
-// Sort by date descending for navigation
-const sorted = posts.slice().sort((a, b) => +b.data.pubDate - +a.data.pubDate);
-const index = sorted.findIndex((p) => p.id === post.id);
-const prev = index < sorted.length - 1 ? { id: sorted[index + 1].id, title: sorted[index + 1].data.title } : null;
-const next = index > 0 ? { id: sorted[index - 1].id, title: sorted[index - 1].data.title } : null;
+const postGroup = Astro.props as Props;
+const posts = await getBlogPostGroups();
+const index = posts.findIndex((post) => post.slug === postGroup.slug);
+const prev = index < posts.length - 1
+  ? { slug: posts[index + 1].slug, title: posts[index + 1].defaultPost.data.title }
+  : null;
+const next = index > 0
+  ? { slug: posts[index - 1].slug, title: posts[index - 1].defaultPost.data.title }
+  : null;
 
-const { Content } = await render(post);
-const readingTimeMin = calculateReadingTimeFromMarkdown((post as any).body || post.data.description || '');
+const renderedContent = await Promise.all(
+  postGroup.languages.map(async (language) => {
+    const entry = postGroup.translations[language];
+
+    if (!entry) {
+      return null;
+    }
+
+    const { Content } = await render(entry);
+
+    return {
+      language,
+      Content,
+    };
+  })
+);
+const languageContent = renderedContent.filter((item): item is NonNullable<typeof item> => Boolean(item));
+const readingTimeMin = calculateReadingTimeFromMarkdown(
+  (postGroup.defaultPost as any).body || postGroup.defaultPost.data.description || ''
+);
 ---
 
-<BlogPost {...post.data} prevPost={prev} nextPost={next} readingTimeMin={readingTimeMin}>
-  <Content />
+<BlogPost
+  postGroup={postGroup}
+  languageMeta={getBlogLanguageMeta(postGroup)}
+  prevPost={prev}
+  nextPost={next}
+  readingTimeMin={readingTimeMin}
+>
+  {languageContent.map(({ language, Content }) => (
+    <div
+      data-blog-content-lang={language}
+      hidden={language !== postGroup.defaultLanguage}
+    >
+      <Content />
+    </div>
+  ))}
 </BlogPost>

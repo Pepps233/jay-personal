@@ -1,21 +1,21 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteShell from '../../../components/SiteShell.astro';
 import BlogLogHeader from '../../../components/blog/BlogLogHeader.astro';
 import BlogPostList from '../../../components/blog/BlogPostList.astro';
 import { slugifyTag } from '../../../lib/slug';
 import { getTagMeta } from '../../../data/tags';
+import { getBlogPostGroups } from '../../../lib/blog';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
+  const posts = await getBlogPostGroups();
+  const tags = [...new Set(posts.flatMap((post) => post.defaultPost.data.tags || []))];
   return tags.map((tag) => ({ params: { tag: slugifyTag(tag) } }));
 }
 
 const { tag } = Astro.params;
-const posts = (await getCollection('blog'))
-  .filter((post) => (post.data.tags || []).some((item) => slugifyTag(item) === tag))
-  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+const posts = (await getBlogPostGroups()).filter((post) =>
+  (post.defaultPost.data.tags || []).some((item) => slugifyTag(item) === tag)
+);
 const meta = getTagMeta(tag);
 ---
 

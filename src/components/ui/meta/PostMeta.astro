@@ -10,9 +10,10 @@ interface Props {
   authorName?: string;
   title: string;
   url: string;
+  showTranslation?: boolean;
 }
 
-const { pubDate, readingTimeMin, authorName, title, url } = Astro.props as Props;
+const { pubDate, readingTimeMin, authorName, title, url, showTranslation = false } = Astro.props as Props;
 const displayName = authorName || author.name;
 ---
 
@@ -30,5 +31,5 @@ const displayName = authorName || author.name;
     <dt>Read</dt>
     <dd>{readingTimeMin} min</dd>
   </dl>
-  <ShareButtons title={title} url={url} />
+  <ShareButtons title={title} url={url} showTranslation={showTranslation} />
 </aside>

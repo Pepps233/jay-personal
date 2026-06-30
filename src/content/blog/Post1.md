@@ -4,6 +4,9 @@ description: 'My first ever experience as a Software Engineer.'
 pubDate: 'Oct 4 2025'
 heroImage: '../../assets/images/blog1-hero.png'
 tags: ['SWE', 'Internship', 'Personal']
+language: 'en'
+defaultLanguage: 'en'
+translationKey: 'post1'
 ---
 # 🌟 Exciting News! 🌟
 
@@ -33,4 +36,3 @@ The team is pushing forward, and we aim to deliver:
 ---
 
 **Let’s reimagine intelligence.**  
-

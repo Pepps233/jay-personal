@@ -1,15 +1,18 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../../FormattedDate.astro';
 import { calculateReadingTimeFromMarkdown } from '../../../lib/reading';
 import { slugifyTag as slugify } from '../../../lib/slug';
+import { getBlogLanguageMeta, getPostHref, type BlogPostGroup } from '../../../lib/blog';
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+  postGroup: BlogPostGroup;
 }
 
-const { post } = Astro.props as Props;
+const { postGroup } = Astro.props as Props;
+const post = postGroup.defaultPost;
+const languageMeta = getBlogLanguageMeta(postGroup);
+const languages = languageMeta.map((item) => item.language).join(',');
 
 let readingTimeMin = 0;
 try {
@@ -18,9 +21,21 @@ try {
 } catch {}
 
 const tags = post.data.tags || [];
+const href = getPostHref(postGroup);
+const titleAttributes = Object.fromEntries(
+  languageMeta.map((item) => [`data-title-${item.language}`, item.title])
+);
 ---
 
-<article class="module-card post-card">
+<article
+  class="module-card post-card"
+  data-blog-translation-root
+  data-blog-card
+  data-blog-slug={postGroup.slug}
+  data-default-language={postGroup.defaultLanguage}
+  data-current-language={postGroup.defaultLanguage}
+  data-languages={languages}
+>
   {post.data.heroImage && (
     <div class="post-card__image">
       <Image width={720} height={405} src={post.data.heroImage} alt={post.data.title} />
@@ -31,8 +46,28 @@ const tags = post.data.tags || [];
       <span><FormattedDate date={post.data.pubDate} /></span>
       {readingTimeMin > 0 && <span>{readingTimeMin} min</span>}
     </div>
-    <h3>{post.data.title}</h3>
-    <p>{post.data.description}</p>
+    <h3 class="blog-translation-stack" data-blog-copy="title">
+      {languageMeta.map((item) => (
+        <span
+          class:list={['blog-lang-fragment', { 'is-active': item.language === postGroup.defaultLanguage }]}
+          data-blog-lang={item.language}
+          aria-hidden={item.language === postGroup.defaultLanguage ? 'false' : 'true'}
+        >
+          {item.title}
+        </span>
+      ))}
+    </h3>
+    <p class="blog-translation-stack" data-blog-copy="description">
+      {languageMeta.map((item) => (
+        <span
+          class:list={['blog-lang-fragment', { 'is-active': item.language === postGroup.defaultLanguage }]}
+          data-blog-lang={item.language}
+          aria-hidden={item.language === postGroup.defaultLanguage ? 'false' : 'true'}
+        >
+          {item.description}
+        </span>
+      ))}
+    </p>
     <div class="post-card__meta mt-4">
       <a href={`/blog/author/${slugify(post.data.author || 'Jay Yu')}/`} class="interactive-link">{post.data.author || 'Jay Yu'}</a>
       {post.data.category && <span>{post.data.category}</span>}
@@ -44,6 +79,11 @@ const tags = post.data.tags || [];
         ))}
       </div>
     )}
+    <div class="card-actions card-actions--translate">
+      <button type="button" class="dev-button blog-translate-btn interactive-link" data-blog-translate-toggle>
+        <span data-blog-translate-label>Translate</span>
+      </button>
+    </div>
   </div>
-  <a href={`/blog/${post.id}/`} class="stretched-link" aria-label={`Read ${post.data.title}`}></a>
+  <a href={href} class="stretched-link" data-blog-read-link aria-label={`Read ${post.data.title}`} {...titleAttributes}></a>
 </article>

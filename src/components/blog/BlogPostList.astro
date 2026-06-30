@@ -1,9 +1,10 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import PostCard from '../ui/card/PostCard.astro';
+import BlogTranslationScript from './BlogTranslationScript.astro';
+import type { BlogPostGroup } from '../../lib/blog';
 
 interface Props {
-  posts: CollectionEntry<'blog'>[];
+  posts: BlogPostGroup[];
   title?: string;
   label?: string;
 }
@@ -20,7 +21,8 @@ const { posts = [], title = 'All posts', label } = Astro.props as Props;
   </div>
   <div class="blog-grid">
     {posts.map((post) => (
-      <PostCard post={post} />
+      <PostCard postGroup={post} />
     ))}
   </div>
+  <BlogTranslationScript />
 </section>

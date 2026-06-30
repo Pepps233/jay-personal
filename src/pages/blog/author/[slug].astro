@@ -1,23 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteShell from '../../../components/SiteShell.astro';
 import BlogLogHeader from '../../../components/blog/BlogLogHeader.astro';
 import BlogPostList from '../../../components/blog/BlogPostList.astro';
 import { slugifyTag as slugify } from '../../../lib/slug';
+import { getBlogPostGroups } from '../../../lib/blog';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getBlogPostGroups();
   const authorSlugs = [
-    ...new Set(posts.map((post) => slugify(post.data.author || 'Jay Yu'))),
+    ...new Set(posts.map((post) => slugify(post.defaultPost.data.author || 'Jay Yu'))),
   ];
   return authorSlugs.map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
-const posts = (await getCollection('blog'))
-  .filter((post) => slugify(post.data.author || 'Jay Yu') === slug)
-  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
-const authorName = posts[0]?.data.author || 'Jay Yu';
+const posts = (await getBlogPostGroups()).filter(
+  (post) => slugify(post.defaultPost.data.author || 'Jay Yu') === slug
+);
+const authorName = posts[0]?.defaultPost.data.author || 'Jay Yu';
 ---
 
 <SiteShell title={`Articles by ${authorName}`} description={`Posts written by ${authorName}.`}>

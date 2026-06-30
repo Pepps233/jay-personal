@@ -4,6 +4,9 @@ description: 'A deep dive into LoRA (Low-Rank Adaptation) and how it enables eff
 pubDate: 'Oct 4 2025'
 heroImage: '../../assets/images/blog3-hero.jpeg'
 tags: ['AI', 'GPT', 'LLM', 'Learning']
+language: 'en'
+defaultLanguage: 'en'
+translationKey: 'post3'
 ---
 
 # Exploring LoRA: Efficient Fine-Tuning for Large Language Models
