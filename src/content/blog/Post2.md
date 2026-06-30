@@ -4,6 +4,9 @@ description: 'The most memorable moments with Rambots weren’t awards—they we
 pubDate: 'Oct 4 2025'
 heroImage: '../../assets/images/blog2-hero.jpg'
 tags: ['Robotics', 'FRC', 'Competition', 'Personal']
+language: 'en'
+defaultLanguage: 'en'
+translationKey: 'post2'
 ---
 
 # Memories Beyond the Scores: My Journey with Rambots FRC 2204

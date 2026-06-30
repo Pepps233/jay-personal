@@ -1,0 +1,162 @@
+<script>
+  (() => {
+    if (window.__blogTranslationReady) {
+      return;
+    }
+
+    window.__blogTranslationReady = true;
+
+    const storagePrefix = 'jay-blog-language:';
+    const languageLabels = {
+      en: 'English',
+      zh: '中文',
+    };
+
+    const getLanguages = (root) =>
+      (root.dataset.languages || '')
+        .split(',')
+        .map((language) => language.trim())
+        .filter(Boolean);
+
+    const getDefaultLanguage = (root) => root.dataset.defaultLanguage || getLanguages(root)[0] || 'en';
+    const getCurrentLanguage = (root) => root.dataset.currentLanguage || getDefaultLanguage(root);
+    const getStorageKey = (slug) => `${storagePrefix}${slug}`;
+
+    const getStoredLanguage = (root) => {
+      const slug = root.dataset.blogSlug;
+
+      if (!slug) {
+        return null;
+      }
+
+      try {
+        const stored = localStorage.getItem(getStorageKey(slug));
+        return getLanguages(root).includes(stored) ? stored : null;
+      } catch {
+        return null;
+      }
+    };
+
+    const storeLanguage = (root, language) => {
+      const slug = root.dataset.blogSlug;
+
+      if (!slug) {
+        return;
+      }
+
+      try {
+        localStorage.setItem(getStorageKey(slug), language);
+      } catch {}
+    };
+
+    const getNextLanguage = (root) => {
+      const languages = getLanguages(root);
+      const current = getCurrentLanguage(root);
+      return languages.find((language) => language !== current) || current;
+    };
+
+    const updateButtons = (root) => {
+      const targetLanguage = getNextLanguage(root);
+      const targetLabel = languageLabels[targetLanguage] || targetLanguage.toUpperCase();
+
+      root.querySelectorAll('[data-blog-translate-toggle]').forEach((button) => {
+        const label = `Translate to ${targetLabel}`;
+        button.setAttribute('aria-label', label);
+
+        const labelNode = button.querySelector('[data-blog-translate-label]');
+        if (labelNode) {
+          labelNode.textContent = label;
+        } else {
+          button.textContent = label;
+        }
+      });
+    };
+
+    const updateReadLinks = (root, language) => {
+      root.querySelectorAll('[data-blog-read-link]').forEach((link) => {
+        const title = link.getAttribute(`data-title-${language}`);
+
+        if (title) {
+          link.setAttribute('aria-label', `Read ${title}`);
+        }
+      });
+    };
+
+    const applyLanguage = (root, language) => {
+      const languages = getLanguages(root);
+      const nextLanguage = languages.includes(language) ? language : getDefaultLanguage(root);
+
+      root.dataset.currentLanguage = nextLanguage;
+      root.setAttribute('lang', nextLanguage === 'zh' ? 'zh-CN' : 'en');
+
+      if (root.hasAttribute('data-blog-article')) {
+        document.documentElement.lang = nextLanguage === 'zh' ? 'zh-CN' : 'en';
+      }
+
+      root.querySelectorAll('[data-blog-lang]').forEach((node) => {
+        const active = node.getAttribute('data-blog-lang') === nextLanguage;
+        node.classList.toggle('is-active', active);
+        node.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+
+      root.querySelectorAll('[data-blog-content-lang]').forEach((node) => {
+        node.hidden = node.getAttribute('data-blog-content-lang') !== nextLanguage;
+      });
+
+      updateReadLinks(root, nextLanguage);
+      updateButtons(root);
+    };
+
+    const animateLanguage = (root, language) => {
+      root.classList.add('is-translating-out');
+
+      window.setTimeout(() => {
+        applyLanguage(root, language);
+        root.classList.remove('is-translating-out');
+        root.classList.add('is-translating-in');
+
+        window.setTimeout(() => {
+          root.classList.remove('is-translating-in');
+        }, 240);
+      }, 160);
+    };
+
+    const initialize = () => {
+      document.querySelectorAll('[data-blog-translation-root]').forEach((root) => {
+        applyLanguage(root, getStoredLanguage(root) || getDefaultLanguage(root));
+      });
+    };
+
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-blog-translate-toggle]');
+
+      if (!button) {
+        return;
+      }
+
+      const root = button.closest('[data-blog-translation-root]');
+
+      if (!root) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const nextLanguage = getNextLanguage(root);
+      storeLanguage(root, nextLanguage);
+
+      if (root.hasAttribute('data-blog-card') || root.hasAttribute('data-blog-article')) {
+        animateLanguage(root, nextLanguage);
+      } else {
+        applyLanguage(root, nextLanguage);
+      }
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initialize, { once: true });
+    } else {
+      initialize();
+    }
+  })();
+</script>

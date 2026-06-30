@@ -1,33 +1,41 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
 import SiteShell from '../components/SiteShell.astro';
 import PostMeta from '../components/ui/meta/PostMeta.astro';
 import PostNav from '../components/ui/nav/PostNav.astro';
 import { slugifyTag } from '../lib/slug';
+import BlogTranslationScript from '../components/blog/BlogTranslationScript.astro';
+import type { BlogLanguageMeta, BlogPostGroup } from '../lib/blog';
 
-type BlogData = CollectionEntry<'blog'>['data'];
-type Props = BlogData & {
+interface Props {
+  postGroup: BlogPostGroup;
+  languageMeta: BlogLanguageMeta[];
   showHeader?: boolean;
-  prevPost?: { id: string; title: string } | null;
-  nextPost?: { id: string; title: string } | null;
+  prevPost?: { slug: string; title: string } | null;
+  nextPost?: { slug: string; title: string } | null;
   readingTimeMin?: number;
-};
+}
 
 const {
-  title,
-  description,
-  pubDate,
-  updatedDate,
-  heroImage,
+  postGroup,
+  languageMeta,
   showHeader = true,
   prevPost = null,
   nextPost = null,
   readingTimeMin = 1,
 } = Astro.props as Props;
 
-const tags = Array.isArray(Astro.props.tags) ? Astro.props.tags : [];
-const authorName = Astro.props.author || 'Jay Yu';
+const defaultPost = postGroup.defaultPost;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+} = defaultPost.data;
+const tags = Array.isArray(defaultPost.data.tags) ? defaultPost.data.tags : [];
+const authorName = defaultPost.data.author || 'Jay Yu';
+const languages = languageMeta.map((item) => item.language).join(',');
 ---
 
 <SiteShell title={title} description={description} image={heroImage} mainClass="article-main">
@@ -65,7 +73,15 @@ const authorName = Astro.props.author || 'Jay Yu';
     })} />
   </Fragment>
 
-  <article class="article-shell">
+  <article
+    class="article-shell"
+    data-blog-translation-root
+    data-blog-article
+    data-blog-slug={postGroup.slug}
+    data-default-language={postGroup.defaultLanguage}
+    data-current-language={postGroup.defaultLanguage}
+    data-languages={languages}
+  >
     {showHeader && (
       <header class:list={['article-hero', { 'article-hero--text-only': !heroImage }]}>
         {heroImage && (
@@ -74,8 +90,28 @@ const authorName = Astro.props.author || 'Jay Yu';
           </div>
         )}
         <div class="article-terminal">
-          <h1>{title}</h1>
-          <p>{description}</p>
+          <h1 class="blog-translation-stack" data-blog-copy="title">
+            {languageMeta.map((item) => (
+              <span
+                class:list={['blog-lang-fragment', { 'is-active': item.language === postGroup.defaultLanguage }]}
+                data-blog-lang={item.language}
+                aria-hidden={item.language === postGroup.defaultLanguage ? 'false' : 'true'}
+              >
+                {item.title}
+              </span>
+            ))}
+          </h1>
+          <p class="blog-translation-stack" data-blog-copy="description">
+            {languageMeta.map((item) => (
+              <span
+                class:list={['blog-lang-fragment', { 'is-active': item.language === postGroup.defaultLanguage }]}
+                data-blog-lang={item.language}
+                aria-hidden={item.language === postGroup.defaultLanguage ? 'false' : 'true'}
+              >
+                {item.description}
+              </span>
+            ))}
+          </p>
           {tags.length > 0 && (
             <div class="chip-row">
               {tags.map((tag) => (
@@ -95,6 +131,7 @@ const authorName = Astro.props.author || 'Jay Yu';
           authorName={authorName}
           title={title}
           url={Astro.url.toString()}
+          showTranslation={languageMeta.length > 1}
         />
       </div>
       <div class="prose article-prose">
@@ -103,4 +140,5 @@ const authorName = Astro.props.author || 'Jay Yu';
       </div>
     </div>
   </article>
+  <BlogTranslationScript />
 </SiteShell>

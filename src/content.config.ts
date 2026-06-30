@@ -1,6 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const blogLanguage = z.enum(['en', 'zh']);
+
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
 	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
@@ -16,6 +18,9 @@ const blog = defineCollection({
 			tags: z.array(z.string()).optional(),
             category: z.string().optional(),
 			author: z.string().optional(),
+			language: blogLanguage.default('en'),
+			defaultLanguage: blogLanguage.default('en'),
+			translationKey: z.string().optional(),
 		}),
 });
 

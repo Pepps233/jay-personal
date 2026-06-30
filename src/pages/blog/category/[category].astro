@@ -1,16 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteShell from '../../../components/SiteShell.astro';
 import BlogLogHeader from '../../../components/blog/BlogLogHeader.astro';
 import BlogPostList from '../../../components/blog/BlogPostList.astro';
 import { getCategoryMeta, slugifyCategory } from '../../../data/categories';
+import { getBlogPostGroups } from '../../../lib/blog';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getBlogPostGroups();
   const categories = [
     ...new Set(
       posts
-        .map((post) => post.data.category || null)
+        .map((post) => post.defaultPost.data.category || null)
         .filter((value): value is string => Boolean(value))
         .map((name) => slugifyCategory(name))
     ),
@@ -19,9 +19,9 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.params;
-const posts = (await getCollection('blog'))
-  .filter((post) => slugifyCategory(post.data.category || '') === category)
-  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+const posts = (await getBlogPostGroups()).filter(
+  (post) => slugifyCategory(post.defaultPost.data.category || '') === category
+);
 const meta = getCategoryMeta(category);
 ---
 

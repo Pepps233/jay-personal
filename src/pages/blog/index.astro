@@ -1,20 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteShell from '../../components/SiteShell.astro';
 import BlogLogHeader from '../../components/blog/BlogLogHeader.astro';
 import BlogPostList from '../../components/blog/BlogPostList.astro';
 import BlogPagination from '../../components/ui/nav/BlogPagination.astro';
 import FeaturedPost from '../../components/ui/card/FeaturedPost.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { getBlogPostGroups } from '../../lib/blog';
 import { calculateReadingTimeFromMarkdown } from '../../lib/reading';
 
 const PAGE_SIZE = 6;
-const posts = (await getCollection('blog')).sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+const posts = await getBlogPostGroups();
 const [featured, ...rest] = posts;
 const firstPagePosts = rest.slice(0, PAGE_SIZE);
 const totalPages = Math.max(1, Math.ceil(rest.length / PAGE_SIZE));
 const featuredReading = featured
-  ? calculateReadingTimeFromMarkdown((featured as any).body || featured.data.description || '')
+  ? calculateReadingTimeFromMarkdown((featured.defaultPost as any).body || featured.defaultPost.data.description || '')
   : 0;
 ---
 
@@ -37,7 +36,7 @@ const featuredReading = featured
           <h2 id="featured-post-title">Pinned post</h2>
         </div>
       </div>
-      <FeaturedPost post={featured} readingTimeMin={featuredReading} />
+      <FeaturedPost postGroup={featured} readingTimeMin={featuredReading} />
     </section>
   )}
 

@@ -4,6 +4,9 @@ description: 'Thrilled to announce I’m now part of Hack the Future @ Purdue Un
 pubDate: 'Oct 12 2025'
 heroImage: '../../assets/images/blog4-hero.png'
 tags: ['Software Development', 'Computer Science', 'Nonprofit Organizations', 'Community', 'Personal']
+language: 'en'
+defaultLanguage: 'en'
+translationKey: 'post4'
 ---
 
 # Hack the Future: Developing Software for Nonprofit Organizations Around the World
@@ -20,4 +23,5 @@ I can’t wait to collaborate with brilliant peers, work on cutting-edge project
 
 ## About Hack the Future
 
-**Hack the Future (HTF)** is a student-led organization at **Purdue University** that develops software solutions for nonprofit organizations around the world. HTF’s mission is to leverage technology for social good — helping nonprofits streamline their operations, expand their impact, and bring meaningful change to communities through innovation and collaboration.
+**Hack the Future (HTF)** is a student-led organization at **Purdue University** that develops software solutions for nonprofit organizations around the world.
+HTF’s mission is to leverage technology for social good - helping nonprofits streamline their operations, expand their impact, and bring meaningful change to communities through innovation and collaboration.

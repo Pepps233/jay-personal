@@ -1,8 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteShell from "../components/SiteShell.astro";
 import PageHeader from "../components/PageHeader.astro";
 import StatusPanel from "../components/StatusPanel.astro";
+import BlogTranslationScript from "../components/blog/BlogTranslationScript.astro";
 import SkillsSection from "../components/sections/SkillsSection.astro";
 import WorkExperience from "../components/sections/WorkExperience.astro";
 import Studies from "../components/sections/Studies.astro";
@@ -14,10 +14,11 @@ import { statusItems } from "../data/status";
 import { skills } from "../data/skills";
 import { work } from "../data/work";
 import { studies } from "../data/studies";
+import { getBlogPostGroups } from "../lib/blog";
 
 const pageTitle = "Component Catalog";
 const pageDescription = "Internal reference for the current component system.";
-const posts = (await getCollection('blog')).sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+const posts = await getBlogPostGroups();
 const [firstPost, secondPost, thirdPost] = posts;
 ---
 
@@ -68,7 +69,7 @@ const [firstPost, secondPost, thirdPost] = posts;
         </div>
         <span class="status-chip">Module</span>
       </div>
-      <FeaturedPost post={firstPost} readingTimeMin={4} />
+      <FeaturedPost postGroup={firstPost} readingTimeMin={4} />
     </section>
   )}
 
@@ -82,8 +83,8 @@ const [firstPost, secondPost, thirdPost] = posts;
         <span class="status-chip">Grid</span>
       </div>
       <div class="blog-grid">
-        {secondPost && <PostCard post={secondPost} />}
-        {thirdPost && <PostCard post={thirdPost} />}
+        {secondPost && <PostCard postGroup={secondPost} />}
+        {thirdPost && <PostCard postGroup={thirdPost} />}
       </div>
       <BlogPagination currentPage={2} totalPages={5} />
     </section>
@@ -93,4 +94,5 @@ const [firstPost, secondPost, thirdPost] = posts;
   <WorkExperience title="Work module" items={work} />
   <Studies title="Studies module" items={studies} />
   <ProjectsSection title="Projects module" />
+  <BlogTranslationScript />
 </SiteShell>

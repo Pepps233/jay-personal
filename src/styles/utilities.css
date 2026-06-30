@@ -635,6 +635,84 @@
   padding-top: 18px;
 }
 
+.card-actions--inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.card-actions--translate {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.blog-translate-btn {
+  cursor: pointer;
+}
+
+.blog-translation-stack {
+  display: grid;
+  min-width: 0;
+}
+
+.blog-lang-fragment {
+  display: block;
+  grid-area: 1 / 1;
+  min-width: 0;
+  opacity: 0;
+  overflow-wrap: anywhere;
+  transform: translateY(6px);
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+  visibility: hidden;
+}
+
+.blog-lang-fragment.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+[data-blog-translation-root].is-translating-out .blog-lang-fragment.is-active {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+[data-blog-translation-root].is-translating-in .blog-lang-fragment.is-active {
+  animation: blog-word-replace 220ms ease both;
+}
+
+[data-blog-article] [data-blog-content-lang] {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+[data-blog-article].is-translating-out [data-blog-content-lang]:not([hidden]) {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+[data-blog-article].is-translating-in [data-blog-content-lang]:not([hidden]) {
+  animation: blog-word-replace 220ms ease both;
+}
+
+[data-blog-content-lang][hidden] {
+  display: none !important;
+}
+
+@keyframes blog-word-replace {
+  from {
+    filter: blur(2px);
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .logo-rail {
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
@@ -751,6 +829,13 @@
   border-top: 1px solid var(--color-border-light);
 }
 
+.article-translate-btn {
+  width: 100%;
+  min-height: 36px;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+}
+
 .sw-share-btn {
   display: inline-flex;
   width: 38px;
@@ -782,6 +867,21 @@
 
 .sw-share-btn svg [stroke] {
   stroke: currentColor !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-lang-fragment {
+    transition: none;
+  }
+
+  [data-blog-article] [data-blog-content-lang] {
+    transition: none;
+  }
+
+  [data-blog-translation-root].is-translating-in .blog-lang-fragment.is-active,
+  [data-blog-article].is-translating-in [data-blog-content-lang]:not([hidden]) {
+    animation: none;
+  }
 }
 
 .article-main {
@@ -822,7 +922,7 @@
 .article-hero__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 0;
 }
 
@@ -868,6 +968,11 @@
   display: grid;
   gap: 10px;
   padding: 14px;
+}
+
+.article-meta-card:hover {
+  border-color: var(--color-border-light);
+  box-shadow: var(--shadow-sm);
 }
 
 .article-meta-card__author {
