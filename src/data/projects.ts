@@ -11,12 +11,7 @@ export const projects = [
 		title: "mendr",
 		date: "2026 June 28",
 		techStack: "TypeScript • Node.js • GitHub CLI • Vitest",
-		description: [
-			"Built an autonomous PR code-review CLI that orchestrates Codex or Claude Code workers through local subscriptions without collecting provider API keys.",
-			"Designed a deterministic review, fix, and validation loop that can scan a pull request, push targeted fixes, and repeat until the PR is clean or the round cap is reached.",
-			"Implemented file-backed daemon state so users can close the original terminal, list active reviews, and inspect progress from the CLI.",
-			"Added structured final report generation that posts one concise pull request summary instead of scattering review noise across the PR.",
-		],
+		description: "mendr keeps pull request review moving after you leave the terminal. Point it at a PR and it coordinates short-lived Codex or Claude Code workers to find scoped issues, apply and validate fixes, and repeat until the review is clean or reaches its round limit. Progress stays inspectable from the CLI, and the finished run lands as one focused PR report.",
 		ctaText: "View Project",
 		ctaLink: "https://github.com/Pepps233/mendr",
 		icon: GitIcon
@@ -25,12 +20,7 @@ export const projects = [
 		title: "ThinkGraph",
 		date: "2026 March 20",
 		techStack: "Next.js • FastAPI • React Flow • PostgreSQL • Celery",
-		description: [
-			"Built an AI research-paper workspace that turns arXiv links or uploaded PDFs into interactive knowledge graphs.",
-			"Implemented a FastAPI extraction pipeline that parses paper content, identifies entities and relationships, and stores graph-ready outputs.",
-			"Created a Next.js graph viewer with zooming, panning, expandable nodes, source provenance, and node detail panels for paper exploration.",
-			"Added async job processing with Celery and Redis so ingestion can stream progress while longer PDF and graph tasks run in the background.",
-		],
+		description: "ThinkGraph turns a dense research paper into a map you can explore. Add an arXiv link or PDF to trace concepts, methods, citations, equations, and reasoning through an interactive knowledge graph, with every node linked back to its source. Graph-aware chat, citation expansion, and multi-paper comparison make it easier to follow an idea across a paper and beyond it.",
 		ctaText: "View Project",
 		ctaLink: "https://github.com/Pepps233/think-graph",
 		icon: PostgresIcon
@@ -39,12 +29,7 @@ export const projects = [
 		title: "Opiral",
 		date: "2026 March 16",
 		techStack: "Next.js • FastAPI • Supabase • Pinecone • OpenAI",
-		description: [
-			"Built a Purdue research-lab matching app that parses student resumes and recommends labs aligned with skills, coursework, research, and projects.",
-			"Used GPT-4o resume extraction with OpenAI embeddings and Pinecone vector search to rank relevant labs from a curated Purdue dataset.",
-			"Generated personalized outreach email openings for each match while keeping the flow login-free and guarded by per-session rate limits.",
-			"Deployed a split frontend and backend architecture with Vercel, FastAPI, Supabase, Pinecone, and Upstash Redis.",
-		],
+		description: "Opiral helps Purdue students find research labs that fit what they already know and what they want to explore. A single resume upload becomes a ranked set of matches across 35+ curated labs, grounded in skills, coursework, research, and projects. Each result also includes a personalized email opening, so students can move from discovery to outreach without creating an account.",
 		ctaText: "View Project",
 		ctaLink: "https://www.opiral.com/",
 		icon: SupabaseIcon
@@ -53,26 +38,16 @@ export const projects = [
 		title: "Embed",
 		date: "2026 February 14",
 		techStack: "React • Vite • FastAPI • IndexedDB • Supabase",
-		description: [
-			"Built a browser-based knowledge companion for highlighting, annotating, and asking questions about web pages and PDFs.",
-			"Implemented a Manifest V3 extension with React, Vite, PDF.js, and local-first IndexedDB storage through Dexie.",
-			"Designed a hybrid local-cloud architecture that keeps annotations available offline while supporting vector search and LLM-powered answers through a FastAPI backend.",
-			"Added typed shared schemas, backend API boundaries, and separate CI checks for the extension and service layers.",
-		],
+		description: "Embed keeps reading, annotation, and questions in the same browser workflow. Highlight a web page or PDF, attach notes, and return to them even while offline through local-first storage. Optional cloud sync, semantic search, and LLM answers add deeper recall without making the core reading experience depend on a connection.",
 		ctaText: "View Project",
-		ctaLink: "https://github.com/Pepps233/embed-ai",
+		ctaLink: "https://github.com/Pepps233/embed",
 		icon: SupabaseIcon
 	},
 	{
 		title: "Overlay Studio",
 		date: "2026 January 7",
 		techStack: "Next.js • React • TypeScript • Tailwind CSS • Supabase",
-		description: [
-			"Built a LinkedIn banner generator with a drag-and-drop canvas for composing custom backgrounds, overlays, and accessories.",
-			"Implemented upload, layer management, resizing, rotation, aspect-ratio locking, and real-time preview controls for banner editing.",
-			"Added PNG and JPEG export options so users can download finished 1584 by 396 banner assets directly from the browser.",
-			"Integrated optional Supabase analytics while keeping the editor usable as a client-first creative tool.",
-		],
+		description: "Overlay Studio is a playful canvas for making LinkedIn banners feel personal. Mix built-in backgrounds, animal overlays, accessories, and your own images with drag-and-drop positioning, layer controls, smart snapping, and live preview. Finished 1584 by 396 designs export directly to PNG or JPEG, with no design software required.",
 		ctaText: "View Project",
 		ctaLink: "https://pepps233.github.io/OverlayStudio/",
 		icon: TailwindIcon
@@ -81,14 +56,7 @@ export const projects = [
 		title: "Barcode scanning Attendance Tracker",
 		date: "2024 August",
 		techStack: "OpenCV • Python • Pandas • Openpyxl",
-		description: [
-            "Designed and developed a barcode scanning sign-in/out system using Python, OpenCV, and Pyzbar to track attendance for a 35–40 member robotics team.",
-            "Automated attendance logging into Excel spreadsheets with Pandas and OpenPyXL, including sign-in, sign-out, and hours calculation per student.",
-            "Built a time-tracking module to calculate session durations and accumulated hours per student.",
-            "Implemented real-time performance monitoring (CPU/memory usage) with psutil for system reliability during continuous use.",
-            "Enhanced user experience with audio feedback on successful or failed scans and real-time webcam display of scanned results.",
-            "Delivered a low-cost, efficient alternative to manual attendance tracking, reducing errors and improving student accountability.",
-		],
+		description: "The Attendance Tracker gives a 35 to 40 member robotics team a quick barcode-based sign-in desk instead of a paper log. A webcam scan records arrival and departure, calculates each student’s session and cumulative hours, and writes the results to an Excel workbook. Live camera feedback, audio cues, and system monitoring keep the kiosk clear and dependable during long team sessions.",
 		ctaText: "View Project",
 		ctaLink: "https://github.com/Pepps233/2204-Attendance-",
 		icon: PythonIcon
@@ -97,12 +65,7 @@ export const projects = [
 		title: "Real-time American Sign Language (ASL) Alphabet Translator",
 		date: "2024 December",
 		techStack: "OpenCV • TensorFlow • MediaPipe • pyttsx3",
-        description: [
-            "Built a real-time ASL translation system using Python, OpenCV, and cvzone to detect hand gestures and classify them into ASL letters.",
-            "Integrated a Keras deep learning model to achieve accurate classification of alphabet signs from live webcam input.",
-            "Implemented image preprocessing techniques (cropping, resizing, normalization) to improve model performance under varying lighting and angles.",
-            "Added text-to-speech functionality (pyttsx3) to convert recognized signs into spoken language for seamless communication.",
-        ],
+		description: "The ASL Alphabet Translator turns live hand signs into a message you can see and hear. It recognizes alphabet gestures through the webcam, lets the signer add or remove letters as a phrase takes shape, and reads the completed text aloud. Simple keyboard controls keep composing, clearing, and speaking the message close at hand.",
 		ctaText: "View Project",
 		ctaLink: "https://github.com/Pepps233/Sign-Language-Translator",
 		icon: PythonIcon
@@ -111,13 +74,7 @@ export const projects = [
 		title: "Employee-Management API (Backend)",
 		date: "2025 August",
 		techStack: "Spring Boot • Java • Spring Data JPA • Docker • PostgreSQL",
-        description: [
-            "Developed a RESTful backend service using Java, Spring Boot, and PostgreSQL to manage employee data with CRUD functions.",
-            "Containerized the PostgreSQL database with Docker, simplifying setup and improving deployment consistency.",
-            "Integrated Spring Data JPA/Hibernate for seamless persistence, automatic schema updates, and efficient query handling.",
-            "Addressed the challenge of unreliable manual employee record management by providing a scalable, automated solution with reliable database-backed APIs.",
-            "Implemented a layered architecture (Controller → Service → Repository) with DTO mapping to ensure clean separation of concerns and maintainable code.",
-        ],
+		description: "The Employee Management API gives teams a predictable home for employee records. Its REST endpoints cover the complete record lifecycle, from adding and finding employees to updating details and removing outdated entries. PostgreSQL persistence and clear error responses keep integrations consistent, while a containerized database makes the service straightforward to run anywhere.",
 		ctaText: "View Project",
 		ctaLink: "https://github.com/Pepps233/Employee-Management-System",
 		icon: N8nIcon
