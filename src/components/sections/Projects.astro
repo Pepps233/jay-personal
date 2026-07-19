@@ -1,5 +1,6 @@
 ---
 import { projects } from "../../data/projects";
+import LiquidProjectMark from "../projects/LiquidProjectMark.astro";
 
 const monthRank = new Map(
   [
@@ -42,22 +43,14 @@ const projectItems = projects.slice().sort((a, b) => projectDateRank(b.date) - p
         <div class="project-card__topline">
           <span>{project.date || "Recent"}</span>
         </div>
-        <div class="project-card__icon" aria-hidden="true" set:html={project.icon} />
+        <LiquidProjectMark name={project.title} {...project.mark} />
         <h3>{project.title}</h3>
         <div class="chip-row" aria-label={`${project.title} stack`}>
           {project.technologies.map((tech) => (
             <span class="tech-chip">{tech}</span>
           ))}
         </div>
-        {Array.isArray(project.description) ? (
-          <ul>
-            {project.description.map((desc) => (
-              <li>{desc}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>{project.description}</p>
-        )}
+        <p>{project.description}</p>
         <div class="card-actions">
           <a class="dev-button" href={project.ctaLink} target="_blank" rel="noopener noreferrer">{project.ctaText}</a>
         </div>
