@@ -6,17 +6,18 @@ import Footer from './sections/Footer.astro';
 interface Props {
   title: string;
   description: string;
+  lang?: string;
   image?: ImageMetadata;
   bodyClass?: string;
   mainClass?: string;
   showFooter?: boolean;
 }
 
-const { title, description, image, bodyClass, mainClass, showFooter = true } = Astro.props as Props;
+const { title, description, lang = 'en', image, bodyClass, mainClass, showFooter = true } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang={lang} data-theme="light">
   <head>
     <BaseHead title={title} description={description} image={image} />
     <slot name="head" />
