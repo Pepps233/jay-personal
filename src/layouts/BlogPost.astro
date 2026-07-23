@@ -36,9 +36,16 @@ const {
 const tags = Array.isArray(defaultPost.data.tags) ? defaultPost.data.tags : [];
 const authorName = defaultPost.data.author || 'Jay Yu';
 const languages = languageMeta.map((item) => item.language).join(',');
+const documentLanguage = postGroup.defaultLanguage === 'zh' ? 'zh-CN' : 'en';
 ---
 
-<SiteShell title={title} description={description} image={heroImage} mainClass="article-main">
+<SiteShell
+  title={title}
+  description={description}
+  lang={documentLanguage}
+  image={heroImage}
+  mainClass="article-main"
+>
   <Fragment slot="head">
     <meta property="og:type" content="article" />
     {pubDate && <meta property="article:published_time" content={new Date(pubDate).toISOString()} />}

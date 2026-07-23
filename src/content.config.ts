@@ -18,6 +18,7 @@ const blog = defineCollection({
 			tags: z.array(z.string()).optional(),
             category: z.string().optional(),
 			author: z.string().optional(),
+			pinned: z.boolean().default(false),
 			language: blogLanguage.default('en'),
 			defaultLanguage: blogLanguage.default('en'),
 			translationKey: z.string().optional(),
