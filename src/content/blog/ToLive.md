@@ -1,7 +1,7 @@
 ---
 title: 'To Live - Yu Hua'
 description: 'From a pampered young heir to a white-haired old farmer, Fugui tells a story of loss, endurance, and remembrance through a lifetime of joys and sorrows. These are some of my reflections after reading To Live: on how suffering shapes a person, and why people still go on living.'
-pubDate: 'Jul 23 2026'
+pubDate: 'Jul 2 2026'
 heroImage: '../../assets/images/huozhe.jpg'
 tags: ['Books', 'Literature', 'Reflection', 'Personal']
 category: 'Reading'

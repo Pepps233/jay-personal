@@ -1,7 +1,7 @@
 ---
 title: '《活着》 - 余华'
 description: '从纨绔子弟到白发老农，福贵用一生的悲欢离合，讲了一个关于失去、承受与怀念的故事。这是我读完《活着》后的一些感想：关于苦难如何塑造一个人，也关于人为什么还要活下去。'
-pubDate: 'Jul 23 2026'
+pubDate: 'Jul 2 2026'
 heroImage: '../../assets/images/huozhe.jpg'
 tags: ['Books', 'Literature', 'Reflection', 'Personal']
 category: 'Reading'
