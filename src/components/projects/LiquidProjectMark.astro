@@ -74,6 +74,13 @@ const { name, symbol, colors, seed } = Astro.props;
         <path class="liquid-mark__detail" d="M66 32h15M73.5 24.5v15" />
       </>
     )}
+    {symbol === "tideline" && (
+      <>
+        <path d="M17 38c10-13 20-13 31 0s21 13 31 0" />
+        <path d="M17 56c10-13 20-13 31 0s21 13 31 0" />
+        <path class="liquid-mark__detail" d="M22 74h52" />
+      </>
+    )}
   </svg>
 
   <span class="liquid-mark__label">{name}</span>

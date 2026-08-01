@@ -1,4 +1,4 @@
-type LiquidSymbol = "mendr" | "graph" | "spiral" | "embed" | "overlay" | "attendance" | "asl" | "people";
+type LiquidSymbol = "mendr" | "graph" | "spiral" | "embed" | "overlay" | "attendance" | "asl" | "people" | "tideline";
 
 interface Project {
 	title: string;
@@ -15,6 +15,19 @@ interface Project {
 }
 
 export const projects: Project[] = [
+	{
+		title: "Tideline",
+		date: "2026 July 9",
+		techStack: "TypeScript • Node.js • SQLite • MCP",
+		mark: {
+			symbol: "tideline",
+			colors: ["#0ea5e9", "#14b8a6", "#6366f1"],
+			seed: 9,
+		},
+		description: "Tideline keeps coding-agent context useful across long sessions. It stores transcripts and exact source items in SQLite, compresses older turns into reversible context blocks, and exposes read-only MCP tools for assembling the right working context when it is needed. Codex hooks and a setup CLI make capture and installation part of the normal workflow.",
+		ctaText: "View Project",
+		ctaLink: "https://github.com/Pepps233/tideline",
+	},
 	{
 		title: "mendr",
 		date: "2026 June 28",
