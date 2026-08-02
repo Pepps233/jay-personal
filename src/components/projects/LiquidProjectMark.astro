@@ -81,6 +81,14 @@ const { name, symbol, colors, seed } = Astro.props;
         <path class="liquid-mark__detail" d="M22 74h52" />
       </>
     )}
+    {symbol === "cascade" && (
+      <>
+        <path d="M27 27h18v18H27z" />
+        <path d="M51 45h18v18H51z" />
+        <path d="M27 63h18v18H27z" />
+        <path class="liquid-mark__detail" d="M45 36h6v18M36 45v18h9" />
+      </>
+    )}
   </svg>
 
   <span class="liquid-mark__label">{name}</span>

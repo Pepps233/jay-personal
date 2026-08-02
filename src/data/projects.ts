@@ -1,4 +1,4 @@
-type LiquidSymbol = "mendr" | "graph" | "spiral" | "embed" | "overlay" | "attendance" | "asl" | "people" | "tideline";
+type LiquidSymbol = "mendr" | "graph" | "spiral" | "embed" | "overlay" | "attendance" | "asl" | "people" | "tideline" | "cascade";
 
 interface Project {
 	title: string;
@@ -16,6 +16,19 @@ interface Project {
 
 export const projects: Project[] = [
 	{
+		title: "Cascade",
+		date: "2026 August 2",
+		techStack: "TypeScript • Node.js • MCP • Claude Code • Codex CLI",
+		mark: {
+			symbol: "cascade",
+			colors: ["#f97316", "#a855f7", "#0ea5e9"],
+			seed: 10,
+		},
+		description: "Cascade decomposes a task into a live dependency graph and executes it with parallel Claude Code and Codex CLI agents. An MCP server plans the subtasks, tracks each node's status as it runs, and fans work out across agents that can execute concurrently once their dependencies clear, so complex work finishes as a graph instead of a single long-running thread.",
+		ctaText: "View Project",
+		ctaLink: "https://pepps233.github.io/cascade-landing/",
+	},
+	{
 		title: "Tideline",
 		date: "2026 July 9",
 		techStack: "TypeScript • Node.js • SQLite • MCP",
@@ -29,7 +42,7 @@ export const projects: Project[] = [
 		ctaLink: "https://github.com/Pepps233/tideline",
 	},
 	{
-		title: "mendr",
+		title: "Mendr",
 		date: "2026 June 28",
 		techStack: "TypeScript • Node.js • GitHub CLI • Vitest",
 		mark: {
